@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import './App.css';
 
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const projects = [
     {
       title: "TodoF1",
@@ -86,20 +89,42 @@ export default function App() {
     }
   ];
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <div className="portfolio-root" style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
       <header className="nav-header">
         <div className="nav-content">
-          <div>
-            <span style={{ fontSize: '10px', letterSpacing: '2px', color: 'var(--accent)', fontWeight: 'bold', textTransform: 'uppercase' }}>Portfolio</span>
-            <h1 style={{ margin: 0, fontSize: '20px', color: 'var(--text-h)', fontWeight: '700' }}>Daniel Zarco Sastre</h1>
+          <div className="nav-logo">
+            <span className="nav-logo-sub">Portfolio</span>
+            <h1 className="nav-logo-name" style={{ fontSize: '18px' }}>Daniel Zarco Sastre</h1>
           </div>
-          <nav className="nav-links">
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#experiencia">Experiencia</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#skills">Tecnologías</a>
-            <a href="#contacto">Contacto</a>
+          
+          <button 
+            className="menu-toggle" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            )}
+          </button>
+
+          <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+            <a href="#sobre-mi" onClick={closeMenu}>Sobre mí</a>
+            <a href="#experiencia" onClick={closeMenu}>Experiencia</a>
+            <a href="#proyectos" onClick={closeMenu}>Proyectos</a>
+            <a href="#skills" onClick={closeMenu}>Tecnologías</a>
+            <a href="#contacto" onClick={closeMenu}>Contacto</a>
           </nav>
         </div>
       </header>
@@ -108,14 +133,14 @@ export default function App() {
         <section className="section-container hero-grid reveal-anim">
           <div>
             <span className="badge badge-cyan">Desarrollador Web</span>
-            <h2 className="heading-xl" style={{ marginTop: '16px' }}>
+            <h2 className="heading-xl mt-16">
               Desarrollo web con foco en <span style={{ color: 'var(--accent)' }}>JavaScript</span>, lógica de datos e <span style={{ color: 'var(--accent-secondary)' }}>interacción real</span>.
             </h2>
             <p className="text-lg">
               Desarrollador web especializado en JavaScript y lógica de datos, con experiencia en proyectos reales enfocados a la interacción y el tratamiento de información. Actualmente compagino mi trabajo con formación avanzada en IA y Big Data.
             </p>
 
-            <div style={{ marginTop: '32px', display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div className="flex-wrap gap-16 mt-32">
               <a href="https://github.com/Daniel-Zarco" className="btn btn-primary" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=d.zarcosastre@gmail.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Email</a>
@@ -147,20 +172,20 @@ export default function App() {
 
         <section id="sobre-mi" className="section-container reveal-anim" style={{ animationDelay: '0.1s' }}>
           <span className="badge badge-cyan">Sobre mí</span>
-          <h3 className="heading-lg" style={{ maxWidth: '800px', marginTop: '16px' }}>
+          <h3 className="heading-lg max-w-800 mt-16">
             Perfil técnico orientado a desarrollo web y tratamiento de información
           </h3>
-          <p className="text-lg" style={{ maxWidth: '900px' }}>
+          <p className="text-lg max-w-900">
             Trabajo como desarrollador web en proyectos donde la interacción, la lógica condicional y el tratamiento de datos tienen un papel clave. He participado en desarrollos centrados en sistemas de encuestas, automatización de flujos de respuesta y validación en tiempo real.
           </p>
-          <p className="text-lg" style={{ maxWidth: '900px', marginTop: '16px' }}>
+          <p className="text-lg max-w-900 mt-16">
             Además, sigo ampliando mi perfil con formación en **Inteligencia Artificial y Big Data**, combinando desarrollo frontend con lógica de negocio compleja.
           </p>
         </section>
 
         <section id="experiencia" className="section-container reveal-anim" style={{ animationDelay: '0.2s' }}>
           <span className="badge badge-cyan">Experiencia</span>
-          <h3 className="heading-lg" style={{ marginTop: '16px' }}>Trayectoria profesional</h3>
+          <h3 className="heading-lg mt-16">Trayectoria profesional</h3>
 
           <div className="experience-list">
             {experience.map((job, idx) => (
@@ -185,9 +210,9 @@ export default function App() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '40px' }}>
             <div>
               <span className="badge badge-cyan">Proyectos</span>
-              <h3 className="heading-lg" style={{ marginTop: '16px', marginBottom: 0 }}>Trabajos destacados</h3>
+              <h3 className="heading-lg mt-16 mb-0">Trabajos destacados</h3>
             </div>
-            <p className="text-lg" style={{ maxWidth: '500px', fontSize: '16px', color: 'var(--text)' }}>
+            <p className="text-lg max-w-500" style={{ fontSize: '16px', color: 'var(--text)' }}>
               Una selección de proyectos que reflejan desarrollo web, gestión de datos y soluciones orientadas al usuario.
             </p>
           </div>
@@ -200,7 +225,7 @@ export default function App() {
                   <span className="project-status">{project.status}</span>
                 </div>
                 <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>{project.description}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '20px' }}>
+                <div className="flex-wrap gap-8 mt-16">
                   {project.tech.map((item) => (
                     <span key={item} className="tech-tag">{item}</span>
                   ))}
@@ -212,13 +237,13 @@ export default function App() {
 
         <section id="skills" className="section-container reveal-anim" style={{ animationDelay: '0.4s' }}>
           <span className="badge badge-cyan">Tecnologías</span>
-          <h3 className="heading-lg" style={{ marginTop: '16px' }}>Herramientas y conocimientos</h3>
+          <h3 className="heading-lg mt-16">Herramientas y conocimientos</h3>
 
           <div className="skill-grid">
             {Object.entries(skills).map(([category, items]) => (
               <div key={category} className="glass-card" style={{ padding: '24px' }}>
                 <h4 className="skill-category">{category}</h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <div className="flex-wrap gap-8">
                   {items.map((item) => (
                     <span key={item} className="skill-tag">{item}</span>
                   ))}
@@ -230,7 +255,7 @@ export default function App() {
 
         <section className="section-container reveal-anim" style={{ animationDelay: '0.5s' }}>
           <span className="badge badge-cyan">Formación</span>
-          <h3 className="heading-lg" style={{ marginTop: '16px' }}>Formación académica</h3>
+          <h3 className="heading-lg mt-16">Formación académica</h3>
 
           <div className="education-grid">
             {education.map((item, idx) => (
@@ -245,12 +270,12 @@ export default function App() {
         <section id="contacto" className="section-container reveal-anim" style={{ animationDelay: '0.6s' }}>
           <div className="glass-card contact-cta">
             <span className="badge badge-cyan">Contacto</span>
-            <h3 className="heading-lg" style={{ marginTop: '16px' }}>¿Listo para colaborar?</h3>
-            <p className="text-lg" style={{ maxWidth: '600px', margin: '0 auto 32px' }}>
+            <h3 className="heading-lg mt-16">¿Listo para colaborar?</h3>
+            <p className="text-lg max-w-600" style={{ margin: '0 auto 32px' }}>
               Puedes encontrarme en Madrid. Actualmente compagino mi trabajo con formación constante, y estoy abierto a nuevos desafíos tecnológicos.
             </p>
 
-            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className="flex-wrap gap-16 justify-center">
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=d.zarcosastre@gmail.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Enviar Email</a>
               <a href="tel:666453572" className="btn btn-secondary">666 453 572</a>
               <a href="https://github.com/Daniel-Zarco" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
