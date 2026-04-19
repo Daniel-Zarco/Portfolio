@@ -378,6 +378,7 @@ body {
   border-left: 2px solid var(--border);
   border-radius: 0 24px 24px 0;
   text-align: left;
+  cursor: pointer;
 }
 
 .experience-item:hover {
@@ -507,6 +508,11 @@ body {
   .education-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.education-item {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .education-title {

@@ -50,6 +50,7 @@ export default function App() {
     {
       role: "Desarrollador Web",
       company: "Análisis e Investigación · Madrid",
+      url: "https://www.analisiseinvestigacion.com/",
       points: [
         "Desarrollo de soluciones interactivas basadas en JavaScript para sistemas de encuestas.",
         "Implementación de lógica condicional compleja y automatización de flujos de respuesta.",
@@ -61,6 +62,7 @@ export default function App() {
     {
       role: "Desarrollador (colaboración técnica)",
       company: "Proyecto UNED · Comunidad de Madrid",
+      url: "https://www.uned.es/universidad/inicio/",
       points: [
         "Mantenimiento y evolución de la base de datos de Patrimonio Cultural.",
         "Desarrollo sobre CMS Drupal y gestión de contenidos.",
@@ -71,6 +73,7 @@ export default function App() {
     {
       role: "Técnico en Sistemas (Prácticas)",
       company: "Mediaset España · Madrid",
+      url: "https://www.mediaset.es/",
       points: [
         "Soporte técnico en entorno corporativo.",
         "Configuración y mantenimiento de equipos.",
@@ -83,17 +86,20 @@ export default function App() {
     {
       title: "Curso de Especialización en Inteligencia Artificial y Big Data",
       institution: "IFP",
-      date: "2025 – Actualidad"
+      date: "2025 – Actualidad",
+      url: "https://www.planetafp.es/"
     },
     {
       title: "Desarrollo de Aplicaciones Web (DAW)",
       institution: "I.E.S. Rosa Chacel",
-      date: "2023 – 2025"
+      date: "2023 – 2025",
+      url: "https://site.educa.madrid.org/ies.rosachacel.madrid/"
     },
     {
       title: "Sistemas Microinformáticos y Redes (SMR)",
       institution: "I.E.S. Rosa Chacel",
-      date: "2021 – 2023"
+      date: "2021 – 2023",
+      url: "https://site.educa.madrid.org/ies.rosachacel.madrid/"
     }
   ];
 
@@ -197,7 +203,14 @@ export default function App() {
 
           <div className="experience-list">
             {experience.map((job, idx) => (
-              <div key={idx} className="glass-card experience-item" style={{ padding: '32px', marginBottom: '24px' }}>
+              <a
+                key={idx}
+                href={job.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card experience-item"
+                style={{ padding: '32px', marginBottom: '24px', display: 'block', textDecoration: 'none', color: 'inherit' }}
+              >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
                     <h4 className="experience-role">{job.role}</h4>
@@ -209,7 +222,7 @@ export default function App() {
                     <li key={pIdx}>{point}</li>
                   ))}
                 </ul>
-              </div>
+              </a>
             ))}
           </div>
         </section>
@@ -267,10 +280,17 @@ export default function App() {
 
           <div className="education-grid">
             {education.map((item, idx) => (
-              <div key={idx} className="glass-card education-item" style={{ padding: '24px' }}>
+              <a
+                key={idx}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card education-item"
+                style={{ padding: '24px', display: 'block', textDecoration: 'none' }}
+              >
                 <h4 className="education-title">{item.title}</h4>
                 <p className="education-meta">{item.institution} · {item.date}</p>
-              </div>
+              </a>
             ))}
           </div>
         </section>
