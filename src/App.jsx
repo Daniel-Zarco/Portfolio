@@ -19,7 +19,7 @@ export default function App() {
         "Aplicación web desarrollada como TFG centrada en datos históricos de Fórmula 1 desde 1950 hasta la actualidad, con visualización interactiva de estadísticas, resultados y enfoque en experiencia de usuario.",
       tech: ["JavaScript", "HTML", "CSS", "SQL", "Frontend"],
       status: "TFG",
-      link: "#",
+      link: "https://github.com/Daniel-Zarco/todoF1",
     },
     {
       title: "FitCity AI",
@@ -240,7 +240,21 @@ export default function App() {
 
           <div className="project-grid">
             {projects.map((project) => (
-              <article key={project.title} className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <a 
+                key={project.title} 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="glass-card" 
+                style={{ 
+                  padding: '24px', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  height: '100%',
+                  textDecoration: 'none',
+                  color: 'inherit'
+                }}
+              >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
                   <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>{project.title}</h4>
                   <span className="project-status">{project.status}</span>
@@ -251,7 +265,7 @@ export default function App() {
                     <span key={item} className="tech-tag">{item}</span>
                   ))}
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </section>
