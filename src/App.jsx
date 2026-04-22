@@ -105,7 +105,7 @@ export default function App() {
         "Colaboración técnica orientada al mantenimiento y evolución de una base de datos de Patrimonio Cultural, trabajando con Drupal, gestión de contenidos y mejoras según requerimientos técnicos del cliente.",
       tech: ["Drupal", "Base de datos", "Gestión de contenidos", "Datos"],
       status: "Colaboración técnica",
-      link: "#",
+      link: "https://www.uned.es/universidad/inicio/",
     },
   ];
 
@@ -313,7 +313,7 @@ export default function App() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card"
+                className="glass-card project-card"
                 style={{
                   padding: '24px',
                   display: 'flex',
@@ -324,15 +324,27 @@ export default function App() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
-                  <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>{project.title}</h4>
+                  <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>
+                    {project.title}
+                  </h4>
                   <span className="project-status">{project.status}</span>
                 </div>
-                <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>{project.description}</p>
+
+                <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>
+                  {project.description}
+                </p>
+
                 <div className="flex-wrap gap-8 mt-16">
                   {project.tech.map((item) => (
                     <span key={item} className="tech-tag">{item}</span>
                   ))}
                 </div>
+
+                {/* 👇 AÑADE ESTO */}
+                <span className="project-link">
+                  Ver proyecto →
+                </span>
+
               </a>
             ))}
           </div>

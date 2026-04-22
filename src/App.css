@@ -57,6 +57,36 @@ body {
   padding: 80px 40px;
 }
 
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hover principal */
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Glow effect */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%,
+      rgba(0, 255, 255, 0.15),
+      transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
 @media (max-width: 1024px) {
   .section-container {
     padding: 60px 40px;
@@ -493,13 +523,12 @@ body {
   margin-top: 24px;
   color: var(--accent);
   font-weight: 600;
-  text-decoration: none;
   font-size: 14px;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
-.project-link:hover {
-  transform: translateX(4px);
+.project-card:hover .project-link {
+  transform: translateX(6px);
 }
 
 /* Skills */
