@@ -57,6 +57,20 @@ body {
   padding: 80px 40px;
 }
 
+.gradient-purple {
+  background: linear-gradient(90deg, #8b5cf6, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.no-break {
+  white-space: nowrap;
+}
+
+.accent-blue {
+  color: var(--accent);
+}
+
 .project-card {
   position: relative;
   overflow: hidden;
@@ -110,6 +124,8 @@ body {
   align-items: center;
 }
 
+
+
 /* HERO NUEVO */
 .hero-section {
   align-items: center;
@@ -121,9 +137,9 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(40px, 6vw, 72px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: clamp(28px, 4.5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
 

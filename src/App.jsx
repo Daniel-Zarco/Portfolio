@@ -217,23 +217,28 @@ export default function App() {
             <span className="badge badge-cyan">Desarrollador Web · Madrid</span>
 
             <h2 className="heading-xl mt-16 hero-title">
-              Desarrollo web con foco en <span style={{ color: 'var(--accent)' }}>JavaScript</span>,
-              <br />
-              lógica de datos y <span style={{ color: 'var(--accent-secondary)' }}>experiencias útiles</span>.
+              Desarrollador Web{" "}<span className="no-break gradient-purple">Full-Stack</span>  con foco en{" "}
+              <span className="accent-blue no-break">
+                lógica de negocio
+              </span>
+              {" "}y{" "}
+              <span className="accent-blue no-break">
+                datos
+              </span>
             </h2>
 
             <p className="text-lg hero-description">
-              Desarrollo interfaces y soluciones web orientadas a interacción real, automatización
-              y tratamiento de datos. Trabajo con JavaScript, Angular y SQL, combinando lógica
-              de negocio con una experiencia de usuario limpia y funcional.
+              Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave.
+              <br />
+              Actualmente ampliando mi perfil con formación en Inteligencia Artificial y Big Data.
             </p>
 
             <div className="hero-stack">
-              <span>JavaScript</span>
               <span>Angular</span>
+              <span>PHP / Laravel</span>
+              <span>JavaScript</span>
               <span>SQL</span>
-              <span>Automatización</span>
-              <span>Datos</span>
+              <span>IA & Big Data</span>
             </div>
 
             <div className="flex-wrap gap-16 mt-32 hero-actions">
@@ -265,15 +270,17 @@ export default function App() {
             <div className="hero-card-top">
               <p className="hero-card-label">Perfil profesional</p>
               <h3 className="hero-card-name">Daniel Zarco Sastre</h3>
-              <p className="hero-card-role">
-                Desarrollador web orientado a frontend, automatización e interacción con datos
+              <p class="hero-card-role">
+                Desarrollo aplicaciones web centradas en lógica de negocio, automatización y tratamiento de datos
               </p>
             </div>
 
             <div className="hero-card-grid">
               <div className="profile-detail">
                 <p className="detail-label">Especialidad</p>
-                <p className="detail-value">JavaScript · Angular · SQL · lógica condicional</p>
+                <p className="detail-value">
+                  Angular · PHP (Laravel) · JavaScript · SQL · IA & Big Data
+                </p>
               </div>
 
               <div className="profile-detail">
