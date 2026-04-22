@@ -5,12 +5,82 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+
+    return () => {
       document.body.style.overflow = 'unset';
-    }
+    };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+
+    const setActiveLink = (id) => {
+      navLinks.forEach((link) => {
+        link.classList.remove('active-link');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active-link');
+        }
+      });
+    };
+
+    const handleNavClick = (e) => {
+      const href = e.currentTarget.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+
+      setActiveLink(href.replace('#', ''));
+
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+
+      setIsMenuOpen(false);
+    };
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 140;
+
+      let currentSectionId = '';
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
+          currentSectionId = section.id;
+        }
+      });
+
+      if (currentSectionId) {
+        setActiveLink(currentSectionId);
+      }
+    };
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', handleNavClick);
+    });
+
+    window.addEventListener('scroll', handleScroll);
+
+    handleScroll();
+
+    return () => {
+      navLinks.forEach((link) => {
+        link.removeEventListener('click', handleNavClick);
+      });
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const projects = [
     {
@@ -103,8 +173,6 @@ export default function App() {
     }
   ];
 
-  const closeMenu = () => setIsMenuOpen(false);
-
   return (
     <div className="portfolio-root" style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
       <header className="nav-header">
@@ -113,9 +181,9 @@ export default function App() {
             <span className="nav-logo-sub">Portfolio</span>
             <h1 className="nav-logo-name">Daniel Zarco Sastre</h1>
           </div>
-          
-          <button 
-            className="menu-toggle" 
+
+          <button
+            className="menu-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -134,11 +202,11 @@ export default function App() {
           </button>
 
           <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#sobre-mi" onClick={closeMenu}>Sobre mí</a>
-            <a href="#experiencia" onClick={closeMenu}>Experiencia</a>
-            <a href="#proyectos" onClick={closeMenu}>Proyectos</a>
-            <a href="#skills" onClick={closeMenu}>Tecnologías</a>
-            <a href="#contacto" onClick={closeMenu}>Contacto</a>
+            <a href="#sobre-mi">Sobre mí</a>
+            <a href="#experiencia">Experiencia</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#skills">Tecnologías</a>
+            <a href="#contacto">Contacto</a>
           </nav>
         </div>
       </header>
@@ -193,7 +261,7 @@ export default function App() {
             Trabajo como desarrollador web en proyectos donde la interacción, la lógica condicional y el tratamiento de datos tienen un papel clave. He participado en desarrollos centrados en sistemas de encuestas, automatización de flujos de respuesta y validación en tiempo real.
           </p>
           <p className="text-lg max-w-900 mt-16">
-            Además, sigo ampliando mi perfil con formación en **Inteligencia Artificial y Big Data**, combinando desarrollo frontend con lógica de negocio compleja.
+            Además, sigo ampliando mi perfil con formación en Inteligencia Artificial y Big Data, combinando desarrollo frontend con lógica de negocio compleja.
           </p>
         </section>
 
@@ -240,16 +308,16 @@ export default function App() {
 
           <div className="project-grid">
             {projects.map((project) => (
-              <a 
-                key={project.title} 
-                href={project.link} 
-                target="_blank" 
+              <a
+                key={project.title}
+                href={project.link}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card" 
-                style={{ 
-                  padding: '24px', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
+                className="glass-card"
+                style={{
+                  padding: '24px',
+                  display: 'flex',
+                  flexDirection: 'column',
                   height: '100%',
                   textDecoration: 'none',
                   color: 'inherit'
