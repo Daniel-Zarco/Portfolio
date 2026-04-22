@@ -212,38 +212,80 @@ export default function App() {
       </header>
 
       <main style={{ paddingTop: '100px' }}>
-        <section className="section-container hero-grid reveal-anim">
-          <div>
-            <span className="badge badge-cyan">Desarrollador Web</span>
-            <h2 className="heading-xl mt-16">
-              Desarrollo web con foco en <span style={{ color: 'var(--accent)' }}>JavaScript</span>, lógica de datos e <span style={{ color: 'var(--accent-secondary)' }}>interacción real</span>.
+        <section className="section-container hero-grid hero-section reveal-anim">
+          <div className="hero-copy">
+            <span className="badge badge-cyan">Desarrollador Web · Madrid</span>
+
+            <h2 className="heading-xl mt-16 hero-title">
+              Desarrollo web con foco en <span style={{ color: 'var(--accent)' }}>JavaScript</span>,
+              <br />
+              lógica de datos y <span style={{ color: 'var(--accent-secondary)' }}>experiencias útiles</span>.
             </h2>
-            <p className="text-lg">
-              Desarrollador web especializado en JavaScript y lógica de datos, con experiencia en proyectos reales enfocados a la interacción y el tratamiento de información. Actualmente compagino mi trabajo con formación avanzada en IA y Big Data.
+
+            <p className="text-lg hero-description">
+              Desarrollo interfaces y soluciones web orientadas a interacción real, automatización
+              y tratamiento de datos. Trabajo con JavaScript, Angular y SQL, combinando lógica
+              de negocio con una experiencia de usuario limpia y funcional.
             </p>
 
-            <div className="flex-wrap gap-16 mt-32">
-              <a href="https://github.com/Daniel-Zarco" className="btn btn-primary" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=d.zarcosastre@gmail.com" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Email</a>
+            <div className="hero-stack">
+              <span>JavaScript</span>
+              <span>Angular</span>
+              <span>SQL</span>
+              <span>Automatización</span>
+              <span>Datos</span>
+            </div>
+
+            <div className="flex-wrap gap-16 mt-32 hero-actions">
+              <a
+                href="https://github.com/Daniel-Zarco"
+                className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver GitHub
+              </a>
+
+              <a href="#proyectos" className="btn btn-secondary">
+                Ver proyectos
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/"
+                className="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '32px' }}>
-            <div style={{ marginBottom: '24px' }}>
-              <p style={{ color: 'var(--accent)', fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px' }}>Perfil Profesional</p>
-              <h3 style={{ fontSize: '28px', color: 'var(--text-h)', margin: 0, fontWeight: '600' }}>Daniel Zarco</h3>
+          <div className="glass-card hero-card">
+            <div className="hero-card-top">
+              <p className="hero-card-label">Perfil profesional</p>
+              <h3 className="hero-card-name">Daniel Zarco Sastre</h3>
+              <p className="hero-card-role">
+                Desarrollador web orientado a frontend, automatización e interacción con datos
+              </p>
             </div>
 
-            <div style={{ display: 'grid', gap: '16px' }}>
+            <div className="hero-card-grid">
+              <div className="profile-detail">
+                <p className="detail-label">Especialidad</p>
+                <p className="detail-value">JavaScript · Angular · SQL · lógica condicional</p>
+              </div>
+
               <div className="profile-detail">
                 <p className="detail-label">Enfoque</p>
-                <p className="detail-value">Interacción web, automatización y tratamiento de datos</p>
+                <p className="detail-value">Interfaces útiles, automatización y tratamiento de información</p>
               </div>
+
               <div className="profile-detail">
-                <p className="detail-label">Stack principal</p>
-                <p className="detail-value">JavaScript · Angular · SQL · Java · Drupal</p>
+                <p className="detail-label">Actualmente</p>
+                <p className="detail-value">Trabajo en desarrollo web y sigo formándome en IA y Big Data</p>
               </div>
+
               <div className="profile-detail" style={{ border: 'none' }}>
                 <p className="detail-label">Ubicación</p>
                 <p className="detail-value">Madrid · España</p>
