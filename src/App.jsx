@@ -111,7 +111,7 @@ export default function App() {
         <div className="nav-content">
           <div className="nav-logo">
             <span className="nav-logo-sub">Portfolio</span>
-            <h1 className="nav-logo-name" style={{ fontSize: '18px' }}>Daniel Zarco Sastre</h1>
+            <h1 className="nav-logo-name">Daniel Zarco Sastre</h1>
           </div>
           
           <button 
