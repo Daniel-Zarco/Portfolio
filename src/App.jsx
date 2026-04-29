@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
@@ -461,6 +464,8 @@ export default function App() {
           © {new Date().getFullYear()} Daniel Zarco Sastre · Madrid
         </p>
       </footer>
+
+      <Analytics />
     </div>
   );
 }
