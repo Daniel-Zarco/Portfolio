@@ -92,7 +92,7 @@ export default function App() {
         "Aplicación web desarrollada como TFG centrada en datos históricos de Fórmula 1 desde 1950 hasta la actualidad, con visualización interactiva de estadísticas, resultados y enfoque en experiencia de usuario.",
       tech: ["JavaScript", "HTML", "CSS", "SQL", "Frontend"],
       status: "TFG",
-      link: "https://github.com/Daniel-Zarco/todoF1",
+      link: "https://github.com/Daniel-Zarco/todoF1-2025",
     },
     {
       title: "FitCity AI",
@@ -359,46 +359,43 @@ export default function App() {
           </div>
 
           <div className="project-grid">
-            {projects.map((project) => (
-              <a
-                key={project.title}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card project-card"
-                style={{
-                  padding: '24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  textDecoration: 'none',
-                  color: 'inherit'
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
-                  <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>
-                    {project.title}
-                  </h4>
-                  <span className="project-status">{project.status}</span>
-                </div>
-
-                <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>
-                  {project.description}
-                </p>
-
-                <div className="flex-wrap gap-8 mt-16">
-                  {project.tech.map((item) => (
-                    <span key={item} className="tech-tag">{item}</span>
-                  ))}
-                </div>
-
-                {/* 👇 AÑADE ESTO */}
-                <span className="project-link">
-                  Ver proyecto →
-                </span>
-
-              </a>
-            ))}
+            {projects.map((project) => {
+              const isLink = project.link && project.link !== "#";
+              const CardWrapper = isLink ? 'a' : 'article';
+              const linkProps = isLink ? { href: project.link, target: "_blank", rel: "noopener noreferrer" } : {};
+              
+              return (
+                <CardWrapper 
+                  key={project.title} 
+                  {...linkProps}
+                  className="glass-card project-card" 
+                  style={{ 
+                    padding: '24px', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    height: '100%',
+                    textDecoration: 'none',
+                    color: 'inherit'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
+                    <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>{project.title}</h4>
+                    <span className="project-status">{project.status}</span>
+                  </div>
+                  <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>{project.description}</p>
+                  <div className="flex-wrap gap-8 mt-16">
+                    {project.tech.map((item) => (
+                      <span key={item} className="tech-tag">{item}</span>
+                    ))}
+                  </div>
+                  {isLink && (
+                    <span className="project-link" style={{ marginTop: '16px' }}>
+                      Ver proyecto →
+                    </span>
+                  )}
+                </CardWrapper>
+              );
+            })}
           </div>
         </section>
 
