@@ -81,8 +81,9 @@ export const about = {
 
 export const experience = [
   {
-    role: 'Desarrollador Web',
+    role: 'Full Stack',
     company: 'Análisis e Investigación · Madrid',
+    period: '2024 – Actualidad',
     url: 'https://www.analisiseinvestigacion.com/',
     points: [
       'Desarrollo de soluciones interactivas basadas en JavaScript para sistemas de encuestas.',

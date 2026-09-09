@@ -65,6 +65,7 @@ export function ExperienceSection() {
                   >
                     {job.company} <span className="experience-company-arrow">↗</span>
                   </a>
+                  {job.period && <p className="experience-period">{job.period}</p>}
                 </div>
               </div>
               <ul className="experience-points">
