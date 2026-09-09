@@ -44,7 +44,13 @@ export default function Header({ isMenuOpen, onToggleMenu }) {
         aria-label="Volver al inicio"
         onClick={go('/')}
       >
-        <span className="nav-logo-mark">©</span>
+        <img
+          src="/dzs-logo.png"
+          alt="DZS"
+          className="nav-logo-img"
+          width="658"
+          height="264"
+        />
         <span className="nav-logo-name">Daniel Zarco Sastre</span>
       </Link>
 

@@ -224,20 +224,10 @@
   letter-spacing: -0.01em;
 }
 
-.nav-logo-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 1.9rem;
-  height: 1.9rem;
-  border: 1px solid var(--color-border-strong);
-  border-radius: 50%;
-  font-size: 0.9rem;
-  line-height: 1;
-  transition: transform 0.5s var(--ease-smooth);
-}
-
-.nav-logo:hover .nav-logo-mark {
-  transform: rotate(360deg);
+.nav-logo-img {
+  display: block;
+  width: auto;
+  height: 1.7rem;
 }
 
 .nav-links {
