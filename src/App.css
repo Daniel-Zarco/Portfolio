@@ -4,14 +4,23 @@
 
 /* ---------- Site shell & preloader ---------- */
 .site {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
-}
-
-.site.started {
   opacity: 1;
   transform: translateY(0);
+}
+
+.page {
+  animation: pageEnter 0.55s var(--ease-smooth) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .preloader {
@@ -158,7 +167,8 @@
   transition: transform 0.4s var(--ease-smooth);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: translateX(0);
 }
 
@@ -256,8 +266,18 @@
   transition: padding 0.4s var(--ease-smooth);
 }
 
-.fullscreen-menu-link:hover {
+.fullscreen-menu-link:hover,
+.fullscreen-menu-link.active {
   padding-left: 1rem;
+}
+
+.fullscreen-menu-link.active .menu-label,
+.fullscreen-menu-link.active .menu-index {
+  color: var(--color-accent-text);
+}
+
+.fullscreen-menu-link.active .menu-index {
+  opacity: 1;
 }
 
 .menu-index {

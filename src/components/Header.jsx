@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import { navLinks } from '../data';
 
 function ArrowUpRight() {
@@ -13,28 +14,39 @@ export function Arrow() {
   return <ArrowUpRight />;
 }
 
-export default function Header({ isMenuOpen, onToggleMenu, onNavClick }) {
+export default function Header({ isMenuOpen, onToggleMenu, setIsMenuOpen }) {
+  const location = useLocation();
+
   return (
     <header className={`nav-header${isMenuOpen ? ' nav-open' : ''}`}>
-      <button
+      <Link
         className="nav-logo"
         data-cursor
-        onClick={onNavClick}
-        data-href="#inicio"
+        to="/"
         aria-label="Volver al inicio"
+        onClick={() => setIsMenuOpen(false)}
       >
         <span className="nav-logo-mark">©</span>
         <span className="nav-logo-name">Daniel Zarco Sastre</span>
-      </button>
+      </Link>
 
       <nav className="nav-links" aria-label="Navegación principal">
-        {navLinks.map((link) => (
-          <a key={link.href} href={link.href} className="nav-link" onClick={onNavClick} data-cursor>
-            <span className="nav-link-inner" data-text={link.label}>
-              {link.label}
-            </span>
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = location.pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`nav-link${isActive ? ' active' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+              data-cursor
+            >
+              <span className="nav-link-inner" data-text={link.label}>
+                {link.label}
+              </span>
+            </Link>
+          );
+        })}
       </nav>
 
       <button
@@ -54,20 +66,30 @@ export default function Header({ isMenuOpen, onToggleMenu, onNavClick }) {
   );
 }
 
-export function FullscreenMenu({ isOpen, onNavClick, onToggle }) {
+export function FullscreenMenu({ isOpen, onToggle }) {
+  const location = useLocation();
+
   return (
     <div className={`fullscreen-menu${isOpen ? ' active' : ''}`}>
       <div className="fullscreen-menu-backdrop" onClick={onToggle} />
       <nav className="fullscreen-menu-inner" aria-label="Menú móvil">
         <ul className="fullscreen-menu-list">
-          {navLinks.map((link, i) => (
-            <li key={link.href} style={{ '--i': i }}>
-              <a href={link.href} className="fullscreen-menu-link" onClick={onNavClick} data-cursor>
-                <span className="menu-index">0{i + 1}</span>
-                <span className="menu-label">{link.label}</span>
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link, i) => {
+            const isActive = location.pathname === link.href;
+            return (
+              <li key={link.href} style={{ '--i': i }}>
+                <Link
+                  to={link.href}
+                  className={`fullscreen-menu-link${isActive ? ' active' : ''}`}
+                  onClick={onToggle}
+                  data-cursor
+                >
+                  <span className="menu-index">0{i + 1}</span>
+                  <span className="menu-label">{link.label}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

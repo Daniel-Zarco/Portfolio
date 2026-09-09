@@ -23,7 +23,7 @@ export const hero = {
   description:
     'Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave. Actualmente ampliando mi perfil con formación en Inteligencia Artificial y Big Data.',
   actions: [
-    { label: 'Ver proyectos', href: '#proyectos', primary: true },
+    { label: 'Ver proyectos', href: '/proyectos', primary: true },
     { label: 'Ver GitHub', href: 'https://github.com/Daniel-Zarco', primary: false },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/', primary: false },
   ],
@@ -171,9 +171,9 @@ export const sectionsIntro = {
 };
 
 export const navLinks = [
-  { label: 'Sobre mí', href: '#sobre-mi' },
-  { label: 'Experiencia', href: '#experiencia' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Tecnologías', href: '#skills' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Sobre mí', href: '/sobre-mi' },
+  { label: 'Experiencia', href: '/experiencia' },
+  { label: 'Proyectos', href: '/proyectos' },
+  { label: 'Tecnologías', href: '/tecnologias' },
+  { label: 'Contacto', href: '/contacto' },
 ];

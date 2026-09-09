@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { hero } from '../data';
 
 function ArrowUpRight() {
@@ -50,33 +51,35 @@ export default function Hero() {
             </p>
 
             <div className="hero-actions">
-              {hero.actions.map((a) =>
-                a.primary ? (
-                  <a
+              {hero.actions.map((a) => {
+                const isExternal = a.href.startsWith('http') || a.href.startsWith('mailto') || a.href.startsWith('tel');
+                if (isExternal) {
+                  return (
+                    <a
+                      key={a.label}
+                      href={a.href}
+                      className={a.primary ? 'btn btn-primary' : 'btn btn-secondary'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor
+                    >
+                      <span className="btn-fill" />
+                      <span className="btn-text">{a.label}</span>
+                    </a>
+                  );
+                }
+                return (
+                  <Link
                     key={a.label}
-                    href={a.href}
-                    className="btn btn-primary"
-                    target={a.href.startsWith('#') ? undefined : '_blank'}
-                    rel={a.href.startsWith('#') ? undefined : 'noopener noreferrer'}
+                    to={a.href}
+                    className={a.primary ? 'btn btn-primary' : 'btn btn-secondary'}
                     data-cursor
                   >
                     <span className="btn-fill" />
                     <span className="btn-text">{a.label}</span>
-                  </a>
-                ) : (
-                  <a
-                    key={a.label}
-                    href={a.href}
-                    className="btn btn-secondary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-cursor
-                  >
-                    <span className="btn-fill" />
-                    <span className="btn-text">{a.label}</span>
-                  </a>
-                )
-              )}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
