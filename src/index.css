@@ -6,19 +6,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Color */
-  --color-dark: #0E0F11;
-  --color-dark-2: #141518;
-  --color-panel: #16181B;
-  --color-white: #FFFFFF;
-  --color-text: #9B9DA0;
-  --color-text-h: #FFFFFF;
-  --color-accent: #455CE9;
-  --color-accent-2: #334BD3;
+  /* Color — paleta pastel clara (protagonismo del azul pastel)
+     --color-dark  = superficie base de la web (ahora muy clara)
+     --color-white = primer plano / texto principal (azul marino)   */
+  --color-dark: #F7FAFE;
+  --color-dark-2: #DCEAF7;
+  --color-panel: #FFFFFF;
+  --color-white: #172A3A;
+  --color-text: #536878;
+  --color-text-h: #172A3A;
+  --color-accent: #8EBFEA;
+  --color-accent-2: #6FA8DC;
+  --color-accent-text: #35719F;
 
-  --color-border: rgba(255, 255, 255, 0.12);
-  --color-border-strong: rgba(255, 255, 255, 0.22);
-  --color-border-soft: rgba(255, 255, 255, 0.06);
+  --color-pastel-blue: #D6E9FA;
+  --color-pastel-lavender: #E3DCF6;
+
+  --color-border: rgba(23, 42, 58, 0.13);
+  --color-border-strong: rgba(23, 42, 58, 0.26);
+  --color-border-soft: rgba(23, 42, 58, 0.07);
 
   /* Layout */
   --section-pt: clamp(4.5rem, 16vh, 11rem);
@@ -90,7 +96,9 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-white);
+  /* Se mantiene blanco intencionadamente: mix-blend-mode lo invierte
+     automáticamente sobre el fondo claro de la web */
+  background: #FFFFFF;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
@@ -105,7 +113,7 @@ body {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
