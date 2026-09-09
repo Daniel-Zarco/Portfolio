@@ -122,7 +122,7 @@ export function getLocalResponse(rawQuestion) {
 
   // Perfil / quién es
   if (has(q, ['quien es', 'quien eres', 'sobre el', 'perfil', 'presentate', 'describe', 'descripcion', 'que hace', 'sobre mi', 'acerca'])) {
-    return `${hero.badge} en ${hero.location}. ${hero.subtitle}. Actualmente amplía su perfil con formación en IA y Big Data.`;
+    return `${hero.badge} en ${hero.location}. ${hero.subtitle}. Ya está titulado en IA y Big Data.`;
   }
 
   // Trabajo actual
@@ -153,6 +153,10 @@ export function getLocalResponse(rawQuestion) {
   }
 
   // Formación
+  if (has(q, ['especializacion', 'especializado', 'especializacion en ia', 'titulado', 'terminado la formacion', 'acabado la formacion', 'finalizado la formacion', 'formacion en ia', 'formacion de ia', 'inteligencia artificial', 'big data', 'terminado la especializacion', 'acabado la especializacion'])) {
+    return `Sí. ${name} ya ha terminado el Curso de Especialización en Inteligencia Artificial y Big Data (IFP) y está titulado.`;
+  }
+
   if (has(q, ['formacion', 'formado', 'estudios', 'estudio', 'educacion', 'curso', 'cursos', 'daw', 'smr', 'instituto'])) {
     return educationAnswer();
   }

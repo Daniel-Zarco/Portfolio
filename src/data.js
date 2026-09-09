@@ -21,7 +21,7 @@ export const hero = {
   location: 'Madrid · España',
   subtitle: 'Desarrollador Web Full-Stack con foco en lógica de negocio y datos',
   description:
-    'Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave. Actualmente ampliando mi perfil con formación en Inteligencia Artificial y Big Data.',
+    'Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave. He completado el Curso de Especialización en Inteligencia Artificial y Big Data y ya estoy titulado.',
   actions: [
     { label: 'Ver proyectos', href: '/proyectos', primary: true },
     { label: 'Ver GitHub', href: 'https://github.com/Daniel-Zarco', primary: false },
@@ -64,7 +64,7 @@ export const about = {
   sectionTitle: 'Perfil técnico orientado a desarrollo web y tratamiento de información',
   paragraphs: [
     'Trabajo como desarrollador web en proyectos donde la interacción, la lógica condicional y el tratamiento de datos tienen un papel clave. He participado en desarrollos centrados en sistemas de encuestas, automatización de flujos de respuesta y validación en tiempo real.',
-    'Además, sigo ampliando mi perfil con formación en Inteligencia Artificial y Big Data, combinando desarrollo frontend con lógica de negocio compleja.',
+    'Además, he completado el Curso de Especialización en Inteligencia Artificial y Big Data y ya estoy titulado, combinando desarrollo frontend con lógica de negocio compleja.',
   ],
   profile: {
     badge: 'Perfil profesional',
@@ -73,7 +73,7 @@ export const about = {
     details: [
       { label: 'Especialidad', value: 'Angular · PHP (Laravel) · JavaScript · SQL · IA & Big Data' },
       { label: 'Enfoque', value: 'Interfaces útiles, automatización y tratamiento de información' },
-      { label: 'Actualmente', value: 'Trabajo en desarrollo web y sigo formándome en IA y Big Data' },
+      { label: 'Actualmente', value: 'Trabajo en desarrollo web como Full Stack y ya estoy titulado en IA y Big Data' },
       { label: 'Ubicación', value: 'Madrid · España' },
     ],
   },
@@ -123,7 +123,7 @@ export const education = [
   {
     title: 'Curso de Especialización en Inteligencia Artificial y Big Data',
     institution: 'IFP',
-    date: '2025 – Actualidad',
+    date: '2025 – 2026',
     url: 'https://www.planetafp.es/',
   },
   {
