@@ -1,22 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-
+  const revealObserverRef = useRef(null);
+  const scrollSpyObserverRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
-
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
   useEffect(() => {
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.reveal, .stripe');
+    revealObserverRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserverRef.current.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    revealElements.forEach((el) => revealObserverRef.current.observe(el));
+
+    return () => {
+      if (revealObserverRef.current) revealObserverRef.current.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
     const sections = document.querySelectorAll('section[id]');
 
     const setActiveLink = (id) => {
@@ -31,57 +60,30 @@ export default function App() {
     const handleNavClick = (e) => {
       const href = e.currentTarget.getAttribute('href');
       if (!href || !href.startsWith('#')) return;
-
       const target = document.querySelector(href);
       if (!target) return;
-
       e.preventDefault();
-
-      setActiveLink(href.replace('#', ''));
-
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setIsMenuOpen(false);
     };
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 140;
+    scrollSpyObserverRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveLink(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-20% 0px -60% 0px' }
+    );
 
-      let currentSectionId = '';
-
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          currentSectionId = section.id;
-        }
-      });
-
-      if (currentSectionId) {
-        setActiveLink(currentSectionId);
-      }
-    };
-
-    navLinks.forEach((link) => {
-      link.addEventListener('click', handleNavClick);
-    });
-
-    window.addEventListener('scroll', handleScroll);
-
-    handleScroll();
+    sections.forEach((section) => scrollSpyObserverRef.current.observe(section));
+    navLinks.forEach((link) => link.addEventListener('click', handleNavClick));
 
     return () => {
-      navLinks.forEach((link) => {
-        link.removeEventListener('click', handleNavClick);
-      });
-      window.removeEventListener('scroll', handleScroll);
+      if (scrollSpyObserverRef.current) scrollSpyObserverRef.current.disconnect();
+      navLinks.forEach((link) => link.removeEventListener('click', handleNavClick));
     };
   }, []);
 
@@ -177,64 +179,89 @@ export default function App() {
   ];
 
   return (
-    <div className="portfolio-root" style={{ minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
-      <header className="nav-header">
-        <div className="nav-content">
-          <div className="nav-logo">
-            <span className="nav-logo-sub">Portfolio</span>
-            <h1 className="nav-logo-name">Daniel Zarco Sastre</h1>
-          </div>
-
-          <button
-            className="menu-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            )}
-          </button>
-
-          <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#experiencia">Experiencia</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#skills">Tecnologías</a>
-            <a href="#contacto">Contacto</a>
-          </nav>
+    <div className="portfolio-root">
+      <header className={`nav-header ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="nav-logo">
+          <span className="nav-logo-sub">Portfolio</span>
+          <h1 className="nav-logo-name">Daniel Zarco Sastre</h1>
         </div>
+
+        <button
+          className="menu-toggle"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          )}
+        </button>
+
+        <nav className="nav-links">
+          <a href="#sobre-mi">Sobre mí</a>
+          <a href="#experiencia">Experiencia</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#skills">Tecnologías</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
       </header>
 
-      <main style={{ paddingTop: '100px' }}>
-        <section className="section-container hero-grid hero-section reveal-anim">
-          <div className="hero-copy">
-            <span className="badge badge-cyan">Desarrollador Web · Madrid</span>
+      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#skills">Tecnologías</a>
+        <a href="#contacto">Contacto</a>
+      </div>
 
-            <h2 className="heading-xl mt-16 hero-title">
-              Desarrollador Web{" "}<span className="no-break gradient-purple">Full-Stack</span>  con foco en{" "}
-              <span className="accent-blue no-break">
-                lógica de negocio
+      <main>
+        <section className="hero-section">
+          <div className="hero-content">
+            <div className="hero-top">
+              <span className="hero-badge">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <polyline points="2.77 0 12 0 12 9.23"></polyline>
+                  <line x1="12" y1="0" x2="0" y2="12"></line>
+                </svg>
+                Desarrollador Web · Madrid
               </span>
-              {" "}y{" "}
-              <span className="accent-blue no-break">
-                datos
-              </span>
-            </h2>
+              <p className="hero-location">Madrid · España</p>
+            </div>
 
-            <p className="text-lg hero-description">
-              Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave.
-              <br />
-              Actualmente ampliando mi perfil con formación en Inteligencia Artificial y Big Data.
-            </p>
+            <div className="hero-name-wrapper">
+              <h1 className="hero-name">
+                Daniel Zarco Sastre<span className="spacer">—</span>
+              </h1>
+            </div>
+
+            <div className="hero-subtitle">
+              <svg className="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <polyline points="2.77 0 12 0 12 9.23"></polyline>
+                <line x1="12" y1="0" x2="0" y2="12"></line>
+              </svg>
+              <h4>Desarrollador Web Full-Stack con foco en lógica de negocio y datos</h4>
+            </div>
+
+            <div className="hero-description">
+              <p>
+                Desarrollo aplicaciones web donde la lógica de negocio, la automatización y el tratamiento de datos tienen un papel clave.
+                Actualmente ampliando mi perfil con formación en Inteligencia Artificial y Big Data.
+              </p>
+            </div>
+
+            <div className="hero-actions">
+              <a href="#proyectos" className="btn btn-round btn-primary">Ver proyectos</a>
+              <a href="https://github.com/Daniel-Zarco" className="btn btn-round btn-secondary" target="_blank" rel="noopener noreferrer">Ver GitHub</a>
+              <a href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/" className="btn btn-round btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
 
             <div className="hero-stack">
               <span>Angular</span>
@@ -243,98 +270,115 @@ export default function App() {
               <span>SQL</span>
               <span>IA & Big Data</span>
             </div>
+          </div>
+        </section>
 
-            <div className="flex-wrap gap-16 mt-32 hero-actions">
-              <a
-                href="https://github.com/Daniel-Zarco"
-                className="btn btn-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver GitHub
-              </a>
+        <section id="proyectos" className="section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="badge">Proyectos</span>
+              <h3>Trabajos destacados</h3>
+            </div>
+            <p className="section-description">
+              Una selección de proyectos que reflejan desarrollo web, gestión de datos y soluciones orientadas al usuario.
+            </p>
+          </div>
 
-              <a href="#proyectos" className="btn btn-secondary">
-                Ver proyectos
-              </a>
+          <div className="projects-list">
+            {projects.map((project, idx) => {
+              const isLink = project.link && project.link !== "#";
+              const linkProps = isLink ? { href: project.link, target: "_blank", rel: "noopener noreferrer" } : {};
 
-              <a
-                href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/"
-                className="btn btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
+              return (
+                <div key={project.title} className={`project-item reveal reveal-delay-${idx}`}>
+                  {isLink ? (
+                    <a {...linkProps}>
+                      <h4>{project.title}</h4>
+                      <p className="project-desc">{project.description}</p>
+                      <span className="project-status">{project.status}</span>
+                    </a>
+                  ) : (
+                    <div className="project-item-inner">
+                      <h4>{project.title}</h4>
+                      <p className="project-desc">{project.description}</p>
+                      <span className="project-status">{project.status}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="sobre-mi" className="section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="badge">Sobre mí</span>
+              <h3>Perfil técnico orientado a desarrollo web y tratamiento de información</h3>
             </div>
           </div>
 
-          <div className="glass-card hero-card">
-            <div className="hero-card-top">
-              <p className="hero-card-label">Perfil profesional</p>
-              <h3 className="hero-card-name">Daniel Zarco Sastre</h3>
-              <p class="hero-card-role">
-                Desarrollo aplicaciones web centradas en lógica de negocio, automatización y tratamiento de datos
+          <div className="about-grid">
+            <div className="about-content reveal">
+              <p>
+                Trabajo como desarrollador web en proyectos donde la interacción, la lógica condicional y el tratamiento de datos tienen un papel clave. He participado en desarrollos centrados en sistemas de encuestas, automatización de flujos de respuesta y validación en tiempo real.
+              </p>
+              <p>
+                Además, sigo ampliando mi perfil con formación en Inteligencia Artificial y Big Data, combinando desarrollo frontend con lógica de negocio compleja.
               </p>
             </div>
 
-            <div className="hero-card-grid">
-              <div className="profile-detail">
-                <p className="detail-label">Especialidad</p>
-                <p className="detail-value">
-                  Angular · PHP (Laravel) · JavaScript · SQL · IA & Big Data
+            <div className="hero-stack-grid reveal reveal-delay-1">
+              <div className="profile-card">
+                <span className="badge">Perfil profesional</span>
+                <h4 className="profile-card-name">Daniel Zarco Sastre</h4>
+                <p className="profile-card-role">
+                  Desarrollo aplicaciones web centradas en lógica de negocio, automatización y tratamiento de datos
                 </p>
-              </div>
 
-              <div className="profile-detail">
-                <p className="detail-label">Enfoque</p>
-                <p className="detail-value">Interfaces útiles, automatización y tratamiento de información</p>
-              </div>
+                <div className="profile-detail">
+                  <p className="detail-label">Especialidad</p>
+                  <p className="detail-value">
+                    Angular · PHP (Laravel) · JavaScript · SQL · IA & Big Data
+                  </p>
+                </div>
 
-              <div className="profile-detail">
-                <p className="detail-label">Actualmente</p>
-                <p className="detail-value">Trabajo en desarrollo web y sigo formándome en IA y Big Data</p>
-              </div>
+                <div className="profile-detail">
+                  <p className="detail-label">Enfoque</p>
+                  <p className="detail-value">Interfaces útiles, automatización y tratamiento de información</p>
+                </div>
 
-              <div className="profile-detail" style={{ border: 'none' }}>
-                <p className="detail-label">Ubicación</p>
-                <p className="detail-value">Madrid · España</p>
+                <div className="profile-detail">
+                  <p className="detail-label">Actualmente</p>
+                  <p className="detail-value">Trabajo en desarrollo web y sigo formándome en IA y Big Data</p>
+                </div>
+
+                <div className="profile-detail" style={{ border: 'none' }}>
+                  <p className="detail-label">Ubicación</p>
+                  <p className="detail-value">Madrid · España</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="sobre-mi" className="section-container reveal-anim" style={{ animationDelay: '0.1s' }}>
-          <span className="badge badge-cyan">Sobre mí</span>
-          <h3 className="heading-lg max-w-800 mt-16">
-            Perfil técnico orientado a desarrollo web y tratamiento de información
-          </h3>
-          <p className="text-lg max-w-900">
-            Trabajo como desarrollador web en proyectos donde la interacción, la lógica condicional y el tratamiento de datos tienen un papel clave. He participado en desarrollos centrados en sistemas de encuestas, automatización de flujos de respuesta y validación en tiempo real.
-          </p>
-          <p className="text-lg max-w-900 mt-16">
-            Además, sigo ampliando mi perfil con formación en Inteligencia Artificial y Big Data, combinando desarrollo frontend con lógica de negocio compleja.
-          </p>
-        </section>
-
-        <section id="experiencia" className="section-container reveal-anim" style={{ animationDelay: '0.2s' }}>
-          <span className="badge badge-cyan">Experiencia</span>
-          <h3 className="heading-lg mt-16">Trayectoria profesional</h3>
+        <section id="experiencia" className="section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="badge">Experiencia</span>
+              <h3>Trayectoria profesional</h3>
+            </div>
+          </div>
 
           <div className="experience-list">
             {experience.map((job, idx) => (
-              <a
-                key={idx}
-                href={job.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-card experience-item"
-                style={{ padding: '32px', marginBottom: '24px', display: 'block', textDecoration: 'none', color: 'inherit' }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', flexWrap: 'wrap', gap: '12px' }}>
+              <div key={idx} className="experience-item reveal">
+                <div className="experience-header">
                   <div>
                     <h4 className="experience-role">{job.role}</h4>
-                    <p className="experience-company">{job.company}</p>
+                    <p className="experience-company">
+                      <a href={job.url} target="_blank" rel="noopener noreferrer">{job.company}</a>
+                    </p>
                   </div>
                 </div>
                 <ul className="experience-points">
@@ -342,72 +386,24 @@ export default function App() {
                     <li key={pIdx}>{point}</li>
                   ))}
                 </ul>
-              </a>
+              </div>
             ))}
           </div>
         </section>
 
-        <section id="proyectos" className="section-container reveal-anim" style={{ animationDelay: '0.3s' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '40px' }}>
-            <div>
-              <span className="badge badge-cyan">Proyectos</span>
-              <h3 className="heading-lg mt-16 mb-0">Trabajos destacados</h3>
+        <section id="skills" className="section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="badge">Tecnologías</span>
+              <h3>Herramientas y conocimientos</h3>
             </div>
-            <p className="text-lg max-w-500" style={{ fontSize: '16px', color: 'var(--text)' }}>
-              Una selección de proyectos que reflejan desarrollo web, gestión de datos y soluciones orientadas al usuario.
-            </p>
           </div>
 
-          <div className="project-grid">
-            {projects.map((project) => {
-              const isLink = project.link && project.link !== "#";
-              const CardWrapper = isLink ? 'a' : 'article';
-              const linkProps = isLink ? { href: project.link, target: "_blank", rel: "noopener noreferrer" } : {};
-              
-              return (
-                <CardWrapper 
-                  key={project.title} 
-                  {...linkProps}
-                  className="glass-card project-card" 
-                  style={{ 
-                    padding: '24px', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    height: '100%',
-                    textDecoration: 'none',
-                    color: 'inherit'
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
-                    <h4 style={{ fontSize: '20px', margin: 0, color: 'var(--text-h)', fontWeight: '600' }}>{project.title}</h4>
-                    <span className="project-status">{project.status}</span>
-                  </div>
-                  <p style={{ fontSize: '14px', lineHeight: '1.6', color: 'var(--text)', flexGrow: 1 }}>{project.description}</p>
-                  <div className="flex-wrap gap-8 mt-16">
-                    {project.tech.map((item) => (
-                      <span key={item} className="tech-tag">{item}</span>
-                    ))}
-                  </div>
-                  {isLink && (
-                    <span className="project-link" style={{ marginTop: '16px' }}>
-                      Ver proyecto →
-                    </span>
-                  )}
-                </CardWrapper>
-              );
-            })}
-          </div>
-        </section>
-
-        <section id="skills" className="section-container reveal-anim" style={{ animationDelay: '0.4s' }}>
-          <span className="badge badge-cyan">Tecnologías</span>
-          <h3 className="heading-lg mt-16">Herramientas y conocimientos</h3>
-
-          <div className="skill-grid">
-            {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="glass-card" style={{ padding: '24px' }}>
-                <h4 className="skill-category">{category}</h4>
-                <div className="flex-wrap gap-8">
+          <div className="skills-grid">
+            {Object.entries(skills).map(([category, items], idx) => (
+              <div key={category} className={`skill-category reveal reveal-delay-${idx}`}>
+                <h4>{category}</h4>
+                <div className="skill-tags">
                   {items.map((item) => (
                     <span key={item} className="skill-tag">{item}</span>
                   ))}
@@ -417,19 +413,22 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section-container reveal-anim" style={{ animationDelay: '0.5s' }}>
-          <span className="badge badge-cyan">Formación</span>
-          <h3 className="heading-lg mt-16">Formación académica</h3>
+        <section className="section">
+          <div className="section-header">
+            <div className="section-title">
+              <span className="badge">Formación</span>
+              <h3>Formación académica</h3>
+            </div>
+          </div>
 
-          <div className="education-grid">
+          <div className="education-list">
             {education.map((item, idx) => (
               <a
                 key={idx}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-card education-item"
-                style={{ padding: '24px', display: 'block', textDecoration: 'none' }}
+                className="education-item reveal"
               >
                 <h4 className="education-title">{item.title}</h4>
                 <p className="education-meta">{item.institution} · {item.date}</p>
@@ -438,28 +437,37 @@ export default function App() {
           </div>
         </section>
 
-        <section id="contacto" className="section-container reveal-anim" style={{ animationDelay: '0.6s' }}>
-          <div className="glass-card contact-cta">
-            <span className="badge badge-cyan">Contacto</span>
-            <h3 className="heading-lg mt-16">¿Listo para colaborar?</h3>
-            <p className="text-lg max-w-600" style={{ margin: '0 auto 32px' }}>
+        <section id="contacto" className="contact-section">
+          <div className="contact-content">
+            <h2>¿Listo para colaborar?</h2>
+            <p className="section-description" style={{ margin: '0 auto 48px' }}>
               Puedes encontrarme en Madrid. Actualmente compagino mi trabajo con formación constante, y estoy abierto a nuevos desafíos tecnológicos.
             </p>
 
-            <div className="flex-wrap gap-16 justify-center">
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=d.zarcosastre@gmail.com" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Enviar Email</a>
-              <a href="tel:666453572" className="btn btn-secondary">666 453 572</a>
-              <a href="https://github.com/Daniel-Zarco" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <div className="contact-actions">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=d.zarcosastre@gmail.com" target="_blank" rel="noopener noreferrer" className="btn btn-round btn-primary">Enviar Email</a>
+              <a href="tel:666453572" className="btn btn-round btn-secondary">666 453 572</a>
+            </div>
+
+            <div className="contact-links">
+              <a href="https://github.com/Daniel-Zarco" className="contact-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/daniel-zarco-sastre-76547b350/" className="contact-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer style={{ padding: '40px', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-        <p style={{ fontSize: '14px', color: 'var(--text)' }}>
-          © {new Date().getFullYear()} Daniel Zarco Sastre · Madrid
-        </p>
+      <footer className="footer">
+        <div className="footer-left">
+          <span>©</span>
+          <span>{new Date().getFullYear()} Daniel Zarco Sastre · Madrid</span>
+        </div>
+        <div className="footer-right">
+          <a href="#sobre-mi">Sobre mí</a>
+          <a href="#experiencia">Experiencia</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+        </div>
       </footer>
 
       <Analytics />
