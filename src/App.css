@@ -209,6 +209,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  background: rgba(17, 17, 17, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: padding 0.4s var(--ease-smooth);
 }
 
@@ -967,6 +971,39 @@
 }
 
 /* ---------- About ---------- */
+#sobre-mi .section-inner {
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+#sobre-mi .section-heading {
+  max-width: 52rem;
+  margin-bottom: clamp(5rem, 12vh, 9rem);
+}
+
+#sobre-mi .section-title {
+  max-width: 15ch;
+}
+
+#sobre-mi .about-grid {
+  grid-template-columns: minmax(0, 0.78fr) minmax(20rem, 0.62fr);
+  gap: clamp(4rem, 11vw, 10rem);
+  align-items: start;
+}
+
+#sobre-mi .about-content {
+  padding-top: clamp(0rem, 3vw, 2.5rem);
+}
+
+#sobre-mi .about-content p {
+  max-width: 34rem;
+  margin-bottom: 2.5rem;
+}
+
+#sobre-mi .profile-card {
+  margin-top: clamp(1rem, 5vw, 4rem);
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -1031,6 +1068,79 @@
   color: var(--color-white);
   font-size: 0.95rem;
   line-height: 1.55;
+}
+
+/* ---------- Minimal home navigation ---------- */
+.home-landing {
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: clamp(8rem, 18vh, 13rem);
+  padding-bottom: clamp(5rem, 12vh, 9rem);
+}
+
+.home-navigation {
+  width: 100%;
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.home-navigation-list {
+  width: 100%;
+}
+
+.home-navigation-item {
+  border-top: 1px solid var(--color-border);
+}
+
+.home-navigation-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-navigation-link {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: clamp(1.15rem, 2.5vw, 2rem) 0;
+  color: var(--color-white);
+  transition: padding 0.45s var(--ease-smooth), color 0.35s ease;
+}
+
+.home-navigation-link:hover {
+  padding-left: 1rem;
+  color: var(--color-accent-text);
+}
+
+.home-navigation-index {
+  color: var(--color-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+}
+
+.home-navigation-label {
+  font-size: clamp(2.2rem, 6vw, 6rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.home-navigation-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: transform 0.45s var(--ease-smooth), background-color 0.35s ease, color 0.35s ease;
+}
+
+.home-navigation-link:hover .home-navigation-arrow {
+  transform: rotate(45deg);
+  background: var(--color-accent);
+  color: var(--color-white);
 }
 
 /* ---------- Experience ---------- */
@@ -1480,6 +1590,43 @@
 
   .about-content p {
     font-size: clamp(1.15rem, 4vw, 1.4rem);
+  }
+
+  #sobre-mi .section-heading {
+    margin-bottom: 4rem;
+  }
+
+  #sobre-mi .about-grid {
+    gap: 4rem;
+  }
+
+  #sobre-mi .profile-card {
+    margin-top: 0;
+  }
+
+  .home-landing {
+    align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+  }
+
+  .home-navigation-link {
+    grid-template-columns: 2rem 1fr auto;
+    gap: 0.75rem;
+    padding: 1.25rem 0;
+  }
+
+  .home-navigation-link:hover {
+    padding-left: 0.5rem;
+  }
+
+  .home-navigation-label {
+    font-size: clamp(2rem, 11vw, 4rem);
+  }
+
+  .home-navigation-arrow {
+    width: 2rem;
+    height: 2rem;
   }
 }
 

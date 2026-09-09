@@ -51,7 +51,6 @@ export default function Header({ isMenuOpen, onToggleMenu }) {
           width="658"
           height="264"
         />
-        <span className="nav-logo-name">Daniel Zarco Sastre</span>
       </Link>
 
       <nav className="nav-links" aria-label="Navegación principal">
