@@ -1510,41 +1510,41 @@
   flex-direction: column;
   gap: 1.1rem;
   padding: clamp(1.15rem, 1.8vw, 1.6rem);
-  background: #FFFFFF;
-  border: 1px solid var(--card-color);
+  background: #EDF1F6;
+  border: 2px solid var(--card-color);
   border-radius: 0.9rem;
   transition: border-color 0.35s ease, transform 0.35s var(--ease-smooth),
     box-shadow 0.35s ease, background-color 0.35s ease;
 }
 
 .tech-card--lang {
-  --card-color: #AEC3D3;
+  --card-color: #9DB8CE;
   --card-color-hover: #7C9DB9;
 }
 
 .tech-card--frontend {
-  --card-color: #CFC4EC;
-  --card-color-hover: #A99AD8;
+  --card-color: #C0B2E9;
+  --card-color-hover: #A79AD9;
 }
 
 .tech-card--backend {
-  --card-color: #F0CBDC;
-  --card-color-hover: #D99BB5;
+  --card-color: #EBBFD4;
+  --card-color-hover: #D898B4;
 }
 
 .tech-card--tools {
-  --card-color: #C6E5D3;
-  --card-color-hover: #93C9AB;
+  --card-color: #A7D8BB;
+  --card-color-hover: #8CC6A7;
 }
 
 .tech-card--ai {
-  --card-color: #F2D6C3;
-  --card-color-hover: #D9A988;
+  --card-color: #F0C3A3;
+  --card-color-hover: #D8A784;
 }
 
 .tech-card--profile {
-  --card-color: #D6E1EA;
-  --card-color-hover: #A9BFD0;
+  --card-color: #C3D5E4;
+  --card-color-hover: #A8BFD0;
 }
 
 .tech-card:hover {
@@ -1594,8 +1594,8 @@
   padding: 0.4rem 0.85rem;
   border: 1px solid rgba(23, 42, 58, 0.1);
   border-radius: 999px;
-  background: #FFFFFF;
-  color: var(--color-text);
+  background: #F7FAFC;
+  color: #4E6071;
   font-size: 0.78rem;
   line-height: 1;
   transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
