@@ -34,84 +34,130 @@ const normalize = (value) =>
   value
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-const join = (values) => values.filter(Boolean).join(' ');
+const has = (question, terms) => terms.some((term) => question.includes(term));
 
-const documents = [
-  {
-    keywords: ['sobre', 'quien', 'perfil', 'descripcion', 'hace'],
-    text: join([about.paragraphs.join(' '), about.profile.role, ...about.profile.details.map((d) => `${d.label}: ${d.value}`)]),
-  },
-  {
-    keywords: ['experiencia', 'trabajo', 'empresa', 'puesto', 'empleo'],
-    text: experience
-      .map((job) => `${job.role} en ${job.company}. ${job.points.join(' ')}`)
-      .join(' '),
-  },
-  {
-    keywords: ['proyecto', 'proyectos', 'portfolio', 'todo', 'fitcity', 'uned'],
-    text: projects
-      .map((project) => `${project.title}: ${project.description} Tecnologias: ${project.tech.join(', ')}. Estado: ${project.status}.`)
-      .join(' '),
-  },
-  {
-    keywords: ['tecnologia', 'tecnologias', 'stack', 'lenguaje', 'angular', 'javascript', 'sql', 'php', 'java', 'git', 'drupal'],
-    text: join([
-      hero.stack.join(', '),
-      ...Object.entries(skills).map(([category, values]) => `${category}: ${values.join(', ')}`),
-    ]),
-  },
-  {
-    keywords: ['estudio', 'estudios', 'formacion', 'educacion', 'curso', 'daw', 'smr'],
-    text: education.map((item) => `${item.title}, ${item.institution}, ${item.date}.`).join(' '),
-  },
-  {
-    keywords: ['contacto', 'contactar', 'email', 'correo', 'telefono', 'github', 'linkedin'],
-    text: `Email: d.zarcosastre@gmail.com. Telefono: ${contact.phoneLabel}. GitHub: ${contact.githubHref}. LinkedIn: ${contact.linkedinHref}.`,
-  },
-];
+const allSkills = [...Object.values(skills).flat(), ...hero.stack];
+const flatSkills = [...new Set(allSkills.map((item) => normalize(item)))];
 
-const directResponses = [
-  {
-    match: ['tecnologia', 'stack', 'sabe angular'],
-    answer: `Daniel trabaja con ${Object.values(skills).flat().join(', ')}. En su stack destacado también aparecen ${hero.stack.join(', ')}.`,
-  },
-  {
-    match: ['experiencia', 'trabajado'],
-    answer: `Tiene experiencia como ${experience.map((job) => `${job.role} en ${job.company}`).join('; ')}.`,
-  },
-  {
-    match: ['proyecto', 'proyectos'],
-    answer: `Sus proyectos incluyen ${projects.map((project) => project.title).join(', ')}. ${projects.map((project) => `${project.title}: ${project.description}`).join(' ')}`,
-  },
-  {
-    match: ['contacto', 'contactar', 'email', 'correo'],
-    answer: `Puedes contactar con Daniel en d.zarcosastre@gmail.com o en el teléfono ${contact.phoneLabel}. También puedes encontrarlo en GitHub y LinkedIn.`,
-  },
-  {
-    match: ['formacion', 'estudios', 'educacion'],
-    answer: education.map((item) => `${item.title} (${item.institution}, ${item.date})`).join('. ') + '.',
-  },
-];
+function projectDetail(question) {
+  const map = [
+    {
+      keys: ['todof1', 'todo f1', 'el proyecto de formula', 'proyecto de f1', ' de f1'],
+      answer: `TodoF1 es su TFG: una aplicación web sobre datos históricos de Fórmula 1 desde 1950 hasta hoy, con estadísticas y resultados interactivos. Tecnologías: JavaScript, HTML, CSS y SQL.`,
+    },
+    {
+      keys: ['fitcity', 'fit city', 'fit'],
+      answer: `FitCity AI es una aplicación geolocalizada de fitness con registro y análisis de ejercicios y rankings por gimnasio, y está integrando funciones de IA para validar movimientos. Se desarrolla con Angular, JavaScript e IA.`,
+    },
+    {
+      keys: ['uned'],
+      answer: `Proyecto UNED es una colaboración técnica para mantener y evolucionar la base de datos de Patrimonio Cultural con Drupal y gestión de contenidos.`,
+    },
+  ];
+  const match = map.find((item) => item.keys.some((key) => question.includes(key)));
+  return match ? match.answer : null;
+}
 
-export function getLocalResponse(question) {
-  const query = normalize(question);
-  if (!query.trim()) return 'Escribe una pregunta sobre Daniel, su experiencia, proyectos, tecnologías o contacto.';
+function techAnswer(question) {
+  const q = normalize(question);
+  const skill = flatSkills.find((item) => q.includes(item));
+  if (skill) {
+    return `Sí. ${name} trabaja con ${skill === 'javascript' ? 'JavaScript' : skill}. Su stack principal es: ${hero.stack.join(', ')}.`;
+  }
+  if (has(q, ['tecnologias', 'tecnologia', 'stack', 'lenguajes', 'lenguaje', 'herramientas', 'que usa', 'que utiliza'])) {
+    return `Sus tecnologías son: ${Object.entries(skills)
+      .map(([category, items]) => `${category}: ${items.join(', ')}`)
+      .join('. ')}. En su día a día también menciona ${hero.stack.join(', ')}.`;
+  }
+  return null;
+}
 
-  const direct = directResponses.find((item) => item.match.some((term) => query.includes(term)));
-  if (direct) return direct.answer;
+function educationAnswer() {
+  return `Formación: ${education
+    .map((item) => `${item.title} en ${item.institution} (${item.date})`)
+    .join(' · ')}.`;
+}
 
-  const tokens = query.split(/\s+/).filter((token) => token.length > 3);
-  const best = documents
-    .map((document) => ({
-      document,
-      score: tokens.reduce((score, token) => score + (document.text.toLowerCase().includes(token) ? 1 : 0), 0),
-    }))
-    .sort((a, b) => b.score - a.score)[0];
+function experienceAnswer() {
+  return `Experiencia: ${experience
+    .map((job) => `${job.role} en ${job.company}`)
+    .join('; ')}.`;
+}
 
-  if (best?.score) return best.document.text;
-  return 'No encuentro ese dato en la información disponible del portfolio.';
+function projectsAnswer() {
+  return `Proyectos destacados: ${projects.map((project) => project.title).join(', ')}. Pregúntame por uno para conocerlo mejor.`;
+}
+
+function contactAnswer() {
+  return `Puedes contactar con ${name}: email d.zarcosastre@gmail.com, teléfono ${contact.phoneLabel}, o por ${contact.githubLabel} y ${contact.linkedinLabel}.`;
+}
+
+export function getLocalResponse(rawQuestion) {
+  const q = normalize(rawQuestion);
+  if (!q) {
+    return 'Puedo ayudarte a conocer mejor a Daniel. Pregúntame por su perfil, experiencia, proyectos, tecnologías o contacto.';
+  }
+
+  // Saludo
+  if (has(q, ['hola', 'buenas', 'hey', 'hello', 'hi ', 'saludos', 'buenos dias', 'buenas tardes'])) {
+    return '¡Hola! Soy el asistente del portfolio de Daniel. ¿Qué quieres saber de él?';
+  }
+
+  // Agradecimiento
+  if (has(q, ['gracias', 'thank', 'genial', 'perfecto'])) {
+    return 'De nada. Si necesitas algo más sobre Daniel, aquí estoy.';
+  }
+
+  // Nombre de la persona
+  if (has(q, ['como se llama', 'su nombre', 'mi nombre', 'tu nombre es', 'como te llamas', 'nombre de', 'quien es daniel'])) {
+    return `${name} es el desarrollador detrás de este portfolio.`;
+  }
+  if (q.includes('nombre') && q.includes('cual')) {
+    return `Su nombre es ${name}.`;
+  }
+
+  // Perfil / quién es
+  if (has(q, ['quien es', 'quien eres', 'sobre el', 'perfil', 'presentate', 'describe', 'descripcion', 'que hace', 'sobre mi', 'acerca'])) {
+    return `${hero.badge} en ${hero.location}. ${hero.subtitle}. Actualmente amplía su perfil con formación en IA y Big Data.`;
+  }
+
+  // Detalle de un proyecto concreto
+  const detail = projectDetail(q);
+  if (detail) return detail;
+
+  // Preguntas por un proyecto / stack en general
+  if (has(q, ['proyectos', 'proyecto', 'portfolio', 'que ha hecho', 'que hizo', 'trabajos'])) {
+    return projectsAnswer();
+  }
+
+  // Preguntas de experiencia
+  if (has(q, ['experiencia', 'trabajado', 'empresa', 'empresas', 'empleo', 'puesto', 'curriculum', 'carrera laboral'])) {
+    return experienceAnswer();
+  }
+
+  // Preguntas de tecnologías / "¿sabe X?"
+  const tech = techAnswer(q);
+  if (tech) return tech;
+
+  if (has(q, ['sabe', 'sabes', 'domina', 'conoce'])) {
+    return 'Esa tecnología no aparece reflejada en su portfolio. Sus tecnologías y herramientas están en la página /tecnologias.';
+  }
+
+  // Formación
+  if (has(q, ['formacion', 'formado', 'estudios', 'estudio', 'educacion', 'curso', 'cursos', 'daw', 'smr', 'instituto'])) {
+    return educationAnswer();
+  }
+
+  // Contacto
+  if (has(q, ['contacto', 'contactar', 'contactar con', 'email', 'correo', 'mail', 'telefono', 'llamar', 'github', 'linkedin', 'redes'])) {
+    return contactAnswer();
+  }
+
+  return 'No he encontrado esa información. Puedes preguntarme por su perfil, experiencia, proyectos, tecnologías, formación o contacto.';
 }
 
 export async function getAssistantResponse(question) {
