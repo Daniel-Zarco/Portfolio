@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { navLinks } from '../data';
+import { usePageTransition } from '../context/TransitionContext';
 
 function ArrowUpRight() {
   return (
@@ -14,8 +15,25 @@ export function Arrow() {
   return <ArrowUpRight />;
 }
 
-export default function Header({ isMenuOpen, onToggleMenu, setIsMenuOpen }) {
+function useNav() {
+  const transitionTo = usePageTransition();
   const location = useLocation();
+
+  const go = (to) => (e) => {
+    if (!to.startsWith('/')) return;
+    e.preventDefault();
+    if (to === location.pathname) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    transitionTo?.(to);
+  };
+
+  return { go };
+}
+
+export default function Header({ isMenuOpen, onToggleMenu }) {
+  const { go } = useNav();
 
   return (
     <header className={`nav-header${isMenuOpen ? ' nav-open' : ''}`}>
@@ -24,7 +42,7 @@ export default function Header({ isMenuOpen, onToggleMenu, setIsMenuOpen }) {
         data-cursor
         to="/"
         aria-label="Volver al inicio"
-        onClick={() => setIsMenuOpen(false)}
+        onClick={go('/')}
       >
         <span className="nav-logo-mark">©</span>
         <span className="nav-logo-name">Daniel Zarco Sastre</span>
@@ -38,11 +56,13 @@ export default function Header({ isMenuOpen, onToggleMenu, setIsMenuOpen }) {
               key={link.href}
               to={link.href}
               className={`nav-link${isActive ? ' active' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={go(link.href)}
               data-cursor
             >
-              <span className="nav-link-inner" data-text={link.label}>
-                {link.label}
+              <span className="nav-link-inner">
+                <span className="nav-link-slip" data-text={link.label}>
+                  {link.label}
+                </span>
               </span>
             </Link>
           );
@@ -68,6 +88,7 @@ export default function Header({ isMenuOpen, onToggleMenu, setIsMenuOpen }) {
 
 export function FullscreenMenu({ isOpen, onToggle }) {
   const location = useLocation();
+  const { go } = useNav();
 
   return (
     <div className={`fullscreen-menu${isOpen ? ' active' : ''}`}>
@@ -81,7 +102,10 @@ export function FullscreenMenu({ isOpen, onToggle }) {
                 <Link
                   to={link.href}
                   className={`fullscreen-menu-link${isActive ? ' active' : ''}`}
-                  onClick={onToggle}
+                  onClick={(e) => {
+                    onToggle();
+                    go(link.href)(e);
+                  }}
                   data-cursor
                 >
                   <span className="menu-index">0{i + 1}</span>

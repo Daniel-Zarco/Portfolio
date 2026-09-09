@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { hero } from '../data';
+import { usePageTransition } from '../context/TransitionContext';
 
 function ArrowUpRight() {
   return (
@@ -11,6 +12,8 @@ function ArrowUpRight() {
 }
 
 export default function Hero() {
+  const transitionTo = usePageTransition();
+  const location = useLocation();
   return (
     <section id="inicio" className="hero">
       <div className="hero-inner">
@@ -80,6 +83,15 @@ export default function Hero() {
                     key={a.label}
                     to={a.href}
                     className={a.primary ? 'btn btn-primary' : 'btn btn-secondary'}
+                    onClick={(e) => {
+                      if (!a.href.startsWith('/')) return;
+                      e.preventDefault();
+                      if (a.href === location.pathname) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                      }
+                      transitionTo?.(a.href);
+                    }}
                     data-cursor
                   >
                     {BtnText}
