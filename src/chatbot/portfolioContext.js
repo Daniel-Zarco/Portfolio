@@ -84,7 +84,7 @@ function educationAnswer() {
 
 function experienceAnswer() {
   return `Experiencia: ${experience
-    .map((job) => `${job.role} en ${job.company}`)
+    .map((job) => `${job.role} en ${job.company}${job.period ? ` (${job.period})` : ''}`)
     .join('; ')}.`;
 }
 
