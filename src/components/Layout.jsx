@@ -66,6 +66,10 @@ export default function Layout({ isMenuOpen, setIsMenuOpen }) {
     }
   }, [transition.phase, transition.to, navigate]);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname, setIsMenuOpen]);
+
   return (
     <TransitionContext.Provider value={transitionTo}>
       {cursor}

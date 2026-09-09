@@ -3,9 +3,10 @@
    ========================================================= */
 
 /* ---------- Site shell & preloader ---------- */
+/* Ojo: ningún transform en este contenedor o los descendientes
+   position:fixed (navbar / menú móvil) dejarían de fijarse al viewport */
 .site {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .page {
@@ -347,12 +348,14 @@
   z-index: 990;
   visibility: hidden;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.5s var(--ease-smooth), visibility 0.5s;
 }
 
 .fullscreen-menu.active {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .fullscreen-menu-backdrop {
@@ -365,13 +368,16 @@
   position: relative;
   height: 100%;
   display: flex;
-  align-items: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 6rem var(--container-pad) 3rem;
 }
 
 .fullscreen-menu-list {
   width: 100%;
   max-width: 60rem;
+  margin: auto 0;
+  pointer-events: auto;
 }
 
 .fullscreen-menu-list li {

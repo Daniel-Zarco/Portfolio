@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Preloader from './components/Preloader';
@@ -14,12 +14,30 @@ import './App.css';
 export default function App() {
   const [started, setStarted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const scrollYRef = useRef(null);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    const body = document.body;
+    if (isMenuOpen) {
+      scrollYRef.current = window.scrollY;
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollYRef.current}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.position = '';
+      body.style.top = '';
+      body.style.left = '';
+      body.style.right = '';
+      body.style.width = '';
+      body.style.overflow = '';
+      if (scrollYRef.current !== null) {
+        window.scrollTo(0, scrollYRef.current);
+        scrollYRef.current = null;
+      }
+    }
   }, [isMenuOpen]);
 
   return (
