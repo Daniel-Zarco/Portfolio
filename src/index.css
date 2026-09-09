@@ -6,20 +6,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Color — paleta oscura elegante inspirada en dennissnellenberg.com/work */
-  --color-dark: #1C1D20;
-  --color-dark-2: #141517;
-  --color-panel: #16181B;
-  --color-white: #FFFFFF;
-  --color-text: #999D9E;
-  --color-text-h: #FFFFFF;
-  --color-accent: #455CE9;
-  --color-accent-2: #334BD3;
-  --color-accent-text: #455CE9;
+  /* Color — blanco limpio + negro + pastel como acento
+     (sistema cromático inspirado en dennissnellenberg.com/about)
+     --color-dark  = superficie base (blanco)
+     --color-white = texto principal (negro)   */
+  --color-dark: #FFFFFF;
+  --color-dark-2: #F7F7F7;
+  --color-panel: #FAFAFA;
+  --color-white: #111111;
+  --color-text: #555555;
+  --color-text-h: #111111;
+  --color-accent: #BDD9EE;
+  --color-accent-2: #DDD7F3;
+  --color-accent-text: #4A7FAE;
 
-  --color-border: rgba(255, 255, 255, 0.12);
-  --color-border-strong: rgba(255, 255, 255, 0.22);
-  --color-border-soft: rgba(255, 255, 255, 0.06);
+  --color-pastel-blue: #EEF6FC;
+  --color-pastel-lavender: #F4F2FB;
+
+  --color-border: #E8E8E8;
+  --color-border-strong: #DADADA;
+  --color-border-soft: #F0F0F0;
 
   /* Layout */
   --section-pt: clamp(4.5rem, 16vh, 11rem);
