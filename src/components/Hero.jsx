@@ -1,0 +1,99 @@
+import { hero } from '../data';
+
+function ArrowUpRight() {
+  return (
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <polyline points="2.77 0 12 0 12 9.23" />
+      <line x1="12" y1="0" x2="0" y2="12" />
+    </svg>
+  );
+}
+
+export default function Hero() {
+  return (
+    <section id="inicio" className="hero">
+      <div className="hero-inner">
+        <div className="hero-top">
+          <span className="hero-badge">
+            <span className="hero-badge-arrow">
+              <ArrowUpRight />
+            </span>
+            {hero.badge}
+          </span>
+          <p className="hero-location">{hero.location}</p>
+        </div>
+
+        <h1 className="hero-name no-select">
+          <span className="hero-name-line">
+            <span className="hero-name-inner" data-split="chars">
+              Daniel Zarco
+            </span>
+          </span>
+          <span className="hero-name-line">
+            <span className="hero-name-inner" data-split="chars">
+              Sastre
+            </span>
+          </span>
+        </h1>
+
+        <div className="hero-lower">
+          <div className="hero-subtitle-wrap">
+            <span className="hero-subtitle-arrow">
+              <ArrowUpRight />
+            </span>
+            <h2 className="hero-subtitle">{hero.subtitle}</h2>
+          </div>
+
+          <div className="hero-aside">
+            <p data-split="lines" className="hero-description">
+              {hero.description}
+            </p>
+
+            <div className="hero-actions">
+              {hero.actions.map((a) =>
+                a.primary ? (
+                  <a
+                    key={a.label}
+                    href={a.href}
+                    className="btn btn-primary"
+                    target={a.href.startsWith('#') ? undefined : '_blank'}
+                    rel={a.href.startsWith('#') ? undefined : 'noopener noreferrer'}
+                    data-cursor
+                  >
+                    <span className="btn-fill" />
+                    <span className="btn-text">{a.label}</span>
+                  </a>
+                ) : (
+                  <a
+                    key={a.label}
+                    href={a.href}
+                    className="btn btn-secondary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor
+                  >
+                    <span className="btn-fill" />
+                    <span className="btn-text">{a.label}</span>
+                  </a>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+
+        <ul className="hero-stack" data-reveal>
+          {hero.stack.map((s) => (
+            <li key={s} className="hero-stack-item">
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="hero-scroll-hint no-select" aria-hidden="true">
+        <span className="hero-scroll-line" />
+        <span className="hero-scroll-text">Scroll</span>
+      </div>
+    </section>
+  );
+}
