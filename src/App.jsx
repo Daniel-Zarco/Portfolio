@@ -8,7 +8,6 @@ import SobreMi from './pages/SobreMi';
 import Experiencia from './pages/Experiencia';
 import Proyectos from './pages/Proyectos';
 import Tecnologias from './pages/Tecnologias';
-import Contacto from './pages/Contacto';
 import './App.css';
 
 export default function App() {
@@ -55,7 +54,6 @@ export default function App() {
               <Route path="/experiencia" element={<Experiencia />} />
               <Route path="/proyectos" element={<Proyectos />} />
               <Route path="/tecnologias" element={<Tecnologias />} />
-              <Route path="/contacto" element={<Contacto />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -6,6 +6,7 @@ import {
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import Header, { FullscreenMenu } from '../components/Header';
 import { Footer } from '../components/Contact';
+import Chatbot from '../components/Chatbot';
 import { useCursor } from '../hooks/useCursor.jsx';
 import { TransitionContext } from '../context/TransitionContext';
 import { navLinks, name } from '../data';
@@ -101,6 +102,7 @@ export default function Layout({ isMenuOpen, setIsMenuOpen }) {
 
         <Footer />
       </div>
+      <Chatbot />
     </TransitionContext.Provider>
   );
 }

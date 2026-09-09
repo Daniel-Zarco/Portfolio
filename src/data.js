@@ -175,5 +175,4 @@ export const navLinks = [
   { label: 'Experiencia', href: '/experiencia' },
   { label: 'Proyectos', href: '/proyectos' },
   { label: 'Tecnologías', href: '/tecnologias' },
-  { label: 'Contacto', href: '/contacto' },
 ];
