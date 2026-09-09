@@ -1432,7 +1432,7 @@
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: 0 var(--container-pad);
+  padding: 2.75rem var(--container-pad);
   background: var(--color-dark-2);
   border-top: 1px solid var(--color-border-soft);
 }
@@ -1446,8 +1446,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--color-border);
   flex-wrap: wrap;
 }
 
@@ -1660,6 +1658,11 @@
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .footer-email-center {
+    margin-inline: 0;
   }
 
   .footer-credits {
