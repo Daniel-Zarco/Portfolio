@@ -33,11 +33,15 @@ export function ContactSection() {
             data-cursor
           >
             <span className="btn-fill" />
-            <span className="btn-text">{contact.emailLabel}</span>
+            <span className="btn-text" data-text={contact.emailLabel}>
+              <span className="btn-text-inner">{contact.emailLabel}</span>
+            </span>
           </a>
           <a href={contact.phoneHref} className="btn btn-secondary btn-round-full" data-cursor>
             <span className="btn-fill" />
-            <span className="btn-text">{contact.phoneLabel}</span>
+            <span className="btn-text" data-text={contact.phoneLabel}>
+              <span className="btn-text-inner">{contact.phoneLabel}</span>
+            </span>
           </a>
         </div>
       </div>
@@ -51,9 +55,6 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-cta">
-          <h2 className="footer-title" data-split="chars">
-            ¿Hablamos?
-          </h2>
           <a
             href={contact.emailHref}
             target="_blank"

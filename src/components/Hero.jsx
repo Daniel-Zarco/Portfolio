@@ -53,6 +53,14 @@ export default function Hero() {
             <div className="hero-actions">
               {hero.actions.map((a) => {
                 const isExternal = a.href.startsWith('http') || a.href.startsWith('mailto') || a.href.startsWith('tel');
+                const BtnText = (
+                  <>
+                    <span className="btn-fill" />
+                    <span className="btn-text" data-text={a.label}>
+                      <span className="btn-text-inner">{a.label}</span>
+                    </span>
+                  </>
+                );
                 if (isExternal) {
                   return (
                     <a
@@ -63,8 +71,7 @@ export default function Hero() {
                       rel="noopener noreferrer"
                       data-cursor
                     >
-                      <span className="btn-fill" />
-                      <span className="btn-text">{a.label}</span>
+                      {BtnText}
                     </a>
                   );
                 }
@@ -75,8 +82,7 @@ export default function Hero() {
                     className={a.primary ? 'btn btn-primary' : 'btn btn-secondary'}
                     data-cursor
                   >
-                    <span className="btn-fill" />
-                    <span className="btn-text">{a.label}</span>
+                    {BtnText}
                   </Link>
                 );
               })}
