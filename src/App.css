@@ -1497,6 +1497,183 @@
   opacity: 0.55;
 }
 
+/* ---------- Tecnologías (página /tecnologias) ---------- */
+.techstack-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: border-color 0.4s ease, transform 0.4s var(--ease-smooth),
+    box-shadow 0.4s ease;
+}
+
+.tech-card:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2.5rem rgba(23, 42, 58, 0.07);
+}
+
+.tech-card--lang {
+  grid-column: span 7;
+}
+
+.tech-card--frontend {
+  grid-column: span 5;
+}
+
+.tech-card--backend {
+  grid-column: span 5;
+}
+
+.tech-card--tools {
+  grid-column: span 7;
+}
+
+.tech-card--lang,
+.tech-card--frontend,
+.tech-card--backend,
+.tech-card--tools {
+  min-height: clamp(12rem, 21vw, 16rem);
+}
+
+.tech-card--wide,
+.tech-card--compact {
+  grid-column: 1 / -1;
+}
+
+.tech-card--wide {
+  justify-content: center;
+  background: rgba(174, 195, 211, 0.18);
+  border-color: rgba(174, 195, 211, 0.55);
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.tech-card--compact {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.tech-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin: 0;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-text-h);
+}
+
+.tech-card--wide .tech-card-title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.tech-card--compact .tech-card-title {
+  margin: 0;
+}
+
+.tech-card-index {
+  flex: none;
+  color: var(--color-text);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.tech-card-lead {
+  max-width: 46rem;
+  color: var(--color-text);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tech-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-card--compact .tech-card-tags {
+  justify-content: flex-end;
+}
+
+.tech-chip {
+  padding: 0.5rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--color-pastel-blue);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  line-height: 1;
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.tech-chip:hover {
+  color: var(--color-accent-text);
+  border-color: var(--color-border-strong);
+  background: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .techstack-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tech-card--lang,
+  .tech-card--frontend,
+  .tech-card--backend,
+  .tech-card--tools,
+  .tech-card--wide,
+  .tech-card--compact {
+    grid-column: auto;
+  }
+
+  .tech-card--wide,
+  .tech-card--compact {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-card--compact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tech-card--compact .tech-card-tags {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 540px) {
+  .techstack-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tech-card,
+  .tech-card--wide,
+  .tech-card--compact {
+    grid-column: auto;
+  }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .skills-grid {

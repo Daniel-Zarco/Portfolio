@@ -1,12 +1,13 @@
 import { usePage } from '../hooks/usePage';
-import { SkillsSection, EducationSection } from '../components/About';
+import TechStack from '../components/TechStack';
+import { EducationSection } from '../components/About';
 
 export default function Tecnologias() {
   usePage();
 
   return (
     <div className="page">
-      <SkillsSection />
+      <TechStack />
       <EducationSection />
     </div>
   );
