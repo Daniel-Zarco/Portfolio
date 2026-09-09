@@ -209,8 +209,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  background: rgba(17, 17, 17, 0.82);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(174, 195, 211, 0.82);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: padding 0.4s var(--ease-smooth);
@@ -977,12 +977,17 @@
 }
 
 #sobre-mi .section-heading {
-  max-width: 52rem;
-  margin-bottom: clamp(5rem, 12vh, 9rem);
+  max-width: none;
+  margin-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+#sobre-mi .section-badge {
+  margin-bottom: 1.1rem;
 }
 
 #sobre-mi .section-title {
-  max-width: 15ch;
+  max-width: 40ch;
+  margin-bottom: 0;
 }
 
 #sobre-mi .about-grid {
@@ -1073,16 +1078,49 @@
 /* ---------- Minimal home navigation ---------- */
 .home-landing {
   min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(20rem, 1fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 8rem);
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: clamp(8rem, 18vh, 13rem) var(--container-pad) clamp(5rem, 12vh, 9rem);
+}
+
+.home-intro {
   display: flex;
-  align-items: flex-end;
-  padding-top: clamp(8rem, 18vh, 13rem);
-  padding-bottom: clamp(5rem, 12vh, 9rem);
+  flex-direction: column;
+  padding: clamp(2rem, 6vh, 4rem) 0;
+}
+
+.home-title {
+  margin-bottom: clamp(1.75rem, 4vh, 3rem);
+}
+
+.home-title-line {
+  display: block;
+  font-size: clamp(3.25rem, 8vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+
+.home-title-dark {
+  color: var(--color-white);
+}
+
+.home-title-mist {
+  color: var(--color-mist);
+}
+
+.home-tagline {
+  font-size: 1.05rem;
+  color: var(--color-text);
 }
 
 .home-navigation {
   width: 100%;
-  max-width: 70rem;
-  margin: 0 auto;
 }
 
 .home-navigation-list {
@@ -1120,7 +1158,7 @@
 }
 
 .home-navigation-label {
-  font-size: clamp(2.2rem, 6vw, 6rem);
+  font-size: clamp(1.75rem, 3.4vw, 3.5rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.98;
@@ -1529,6 +1567,12 @@
   .about-grid {
     grid-template-columns: 1fr;
   }
+
+  .home-landing {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: clamp(2.5rem, 6vh, 4.5rem);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1605,9 +1649,12 @@
   }
 
   .home-landing {
-    align-items: center;
     padding-top: 8rem;
     padding-bottom: 5rem;
+  }
+
+  .home-title-line {
+    font-size: clamp(2.75rem, 13vw, 5.5rem);
   }
 
   .home-navigation-link {

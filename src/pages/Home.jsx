@@ -10,6 +10,14 @@ export default function Home() {
 
   return (
     <div className="page home-landing">
+      <div className="home-intro">
+        <h1 className="home-title" aria-label="Daniel Zarco Sastre">
+          <span className="home-title-line home-title-dark">Daniel</span>
+          <span className="home-title-line home-title-mist">Zarco Sastre</span>
+        </h1>
+        <p className="home-tagline">Desarrollador Full-Stack · IA &amp; Big Data</p>
+      </div>
+
       <nav className="home-navigation" aria-label="Secciones del portfolio">
         <ul className="home-navigation-list">
           {navLinks.map((link, index) => (
