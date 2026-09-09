@@ -1,14 +1,5 @@
 import { contact, contactSection, name } from '../data';
 
-function ArrowUpRight() {
-  return (
-    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <polyline points="2.77 0 12 0 12 9.23" />
-      <line x1="12" y1="0" x2="0" y2="12" />
-    </svg>
-  );
-}
-
 export function ContactSection() {
   return (
     <section id="contacto" className="contact-section">
@@ -54,21 +45,6 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <div className="footer-cta">
-          <a
-            href={contact.emailHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-email"
-            data-cursor
-          >
-            d.zarcosastre@gmail.com
-            <span className="footer-email-arrow">
-              <ArrowUpRight />
-            </span>
-          </a>
-        </div>
-
         <div className="footer-bottom">
           <div className="footer-socials">
             <a
@@ -93,6 +69,16 @@ export function Footer() {
               {contact.phoneLabel}
             </a>
           </div>
+
+          <a
+            href={contact.emailHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link footer-email-center"
+            data-cursor
+          >
+            d.zarcosastre@gmail.com <span>↗</span>
+          </a>
 
           <div className="footer-credits">
             <p>
