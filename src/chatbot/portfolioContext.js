@@ -125,6 +125,11 @@ export function getLocalResponse(rawQuestion) {
     return `${hero.badge} en ${hero.location}. ${hero.subtitle}. Actualmente amplía su perfil con formación en IA y Big Data.`;
   }
 
+  // Trabajo actual
+  if (has(q, ['donde trabaja', 'trabaja actualmente', 'donde esta trabajando', 'donde estas trabajando', 'trabaja ahora', 'empresa actual', 'actualmente en que', 'se dedica', 'dedica actualmente', 'que hace actualmente'])) {
+    return `Actualmente trabaja como ${experience[0].role} en ${experience[0].company}${experience[0].period ? ` (${experience[0].period})` : ''}.`;
+  }
+
   // Detalle de un proyecto concreto
   const detail = projectDetail(q);
   if (detail) return detail;
