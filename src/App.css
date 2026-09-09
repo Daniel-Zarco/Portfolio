@@ -1432,7 +1432,7 @@
 
 /* ---------- Footer ---------- */
 .footer {
-  padding: var(--section-pb) var(--container-pad) 3rem;
+  padding: 0 var(--container-pad);
   background: var(--color-dark-2);
   border-top: 1px solid var(--color-border-soft);
 }
