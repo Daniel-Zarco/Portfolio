@@ -77,7 +77,7 @@ export const certifications = [
     issuer: 'IBM',
     title: 'Artificial Intelligence Fundamentals',
     date: 'Sep 10, 2026',
-    url: 'https://www.credly.com/earner/earned/share/a4b54a7a-d28f-41fd-a030-81122620cfad',
+    url: 'https://www.credly.com/earner/earned/badge/a4b54a7a-d28f-41fd-a030-81122620cfad',
     image: '/certificates/ibm-artificial-intelligence-fundamentals.png',
   },
 ];

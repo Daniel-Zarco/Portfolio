@@ -1085,6 +1085,15 @@
   }
 }
 
+/* Menos espacio entre el listado de proyectos y Certificaciones */
+#proyectos.section {
+  padding-bottom: clamp(2rem, 6vh, 4rem);
+}
+
+#certificaciones.section {
+  padding-top: clamp(2.5rem, 7vh, 4.5rem);
+}
+
 /* ---------- About ---------- */
 #sobre-mi .section-inner {
   max-width: 90rem;
