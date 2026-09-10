@@ -32,6 +32,15 @@ export const hero = {
 
 export const projects = [
   {
+    title: 'MiCarro',
+    description:
+      'Aplicación web full-stack para gestionar la compra de forma sencilla, con productos, favoritos y funcionalidades orientadas a organizar y facilitar la cesta de la compra. Arquitectura: Angular → HTTP/REST → Spring Boot → JPA → PostgreSQL.',
+    tech: ['Angular', 'Spring Boot', 'Java', 'PostgreSQL', 'REST API', 'JPA'],
+    status: 'En desarrollo',
+    link: 'https://github.com/Daniel-Zarco/MiCarro',
+    demo: null,
+  },
+  {
     title: 'TodoF1',
     description:
       'Aplicación web desarrollada como TFG centrada en datos históricos de Fórmula 1 desde 1950 hasta la actualidad, con visualización interactiva de estadísticas, resultados y enfoque en experiencia de usuario.',
