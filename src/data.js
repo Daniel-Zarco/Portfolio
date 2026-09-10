@@ -69,6 +69,18 @@ export const projects = [
   },
 ];
 
+// Certificaciones — lista escalable.
+// Añade aquí nuevas entradas; la sección de /proyectos se genera sola.
+// Si el array está vacío, la sección no se muestra.
+export const certifications = [
+  // {
+  //   issuer: 'Entidad emisora',
+  //   title: 'Nombre del certificado',
+  //   date: '2025', // opcional
+  //   url: 'https://...', // enlace a la credencial
+  // },
+];
+
 export const about = {
   sectionTitle: 'Perfil técnico orientado a desarrollo web y tratamiento de información',
   paragraphs: [
@@ -161,6 +173,12 @@ export const sectionsIntro = {
     title: 'Trabajos destacados',
     description:
       'Una selección de proyectos que reflejan desarrollo web, gestión de datos y soluciones orientadas al usuario.',
+  },
+  certifications: {
+    badge: 'Certificaciones',
+    title: 'Certificaciones',
+    description:
+      'Certificados y credenciales que acreditan mi formación y conocimientos técnicos.',
   },
   about: {
     badge: 'Sobre mí',
