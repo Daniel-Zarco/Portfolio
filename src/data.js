@@ -73,12 +73,13 @@ export const projects = [
 // Añade aquí nuevas entradas; la sección de /proyectos se genera sola.
 // Si el array está vacío, la sección no se muestra.
 export const certifications = [
-  // {
-  //   issuer: 'Entidad emisora',
-  //   title: 'Nombre del certificado',
-  //   date: '2025', // opcional
-  //   url: 'https://...', // enlace a la credencial
-  // },
+  {
+    issuer: 'IBM',
+    title: 'Artificial Intelligence Fundamentals',
+    date: 'Sep 10, 2026',
+    url: 'https://www.credly.com/earner/earned/share/a4b54a7a-d28f-41fd-a030-81122620cfad',
+    image: '/certificates/ibm-artificial-intelligence-fundamentals.png',
+  },
 ];
 
 export const about = {

@@ -31,6 +31,11 @@ export function CertificationsSection() {
                       }
                     : {})}
                 >
+                  {cert.image && (
+                    <span className="cert-card-media">
+                      <img src={cert.image} alt={cert.title} loading="lazy" />
+                    </span>
+                  )}
                   <span className="cert-card-issuer">{cert.issuer}</span>
                   <h3 className="cert-card-title">{cert.title}</h3>
                   <div className="cert-card-footer">
