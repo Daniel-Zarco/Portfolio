@@ -34,7 +34,7 @@ export const projects = [
   {
     title: 'MiCarro',
     description:
-      'Aplicación web full-stack para gestionar la compra de forma sencilla, con productos, favoritos y funcionalidades orientadas a organizar y facilitar la cesta de la compra. Arquitectura: Angular → HTTP/REST → Spring Boot → JPA → PostgreSQL.',
+      'Aplicación web full-stack para gestionar la compra de forma sencilla, con productos, favoritos y funcionalidades orientadas a organizar y facilitar la cesta de la compra.',
     tech: ['Angular', 'Spring Boot', 'Java', 'PostgreSQL', 'REST API', 'JPA'],
     status: 'En desarrollo',
     link: 'https://github.com/Daniel-Zarco/MiCarro',
