@@ -1,5 +1,6 @@
 import {
   about,
+  certifications,
   contact,
   education,
   experience,
@@ -22,6 +23,7 @@ export const portfolioContext = {
   projects,
   skills,
   education,
+  certifications,
   contact: {
     email: 'd.zarcosastre@gmail.com',
     phone: contact.phoneLabel,
@@ -80,6 +82,42 @@ function educationAnswer() {
   return `Formación: ${education
     .map((item) => `${item.title} en ${item.institution} (${item.date})`)
     .join(' · ')}.`;
+}
+
+function certificationsAnswer(q) {
+  if (!certifications.length) {
+    return 'De momento no tiene certificaciones publicadas en el portfolio.';
+  }
+  const fmt = (c) =>
+    `${c.title}, de ${c.issuer}${c.date ? ` (${c.date})` : ''}`;
+  const listSection =
+    certifications.length > 1
+      ? ' Puedes verlas en la sección Certificaciones de /proyectos.'
+      : ' Puedes verla en la sección Certificaciones de /proyectos.';
+
+  if (/\b(ia|ai)\b|inteligenc|big data|datos\b/.test(q)) {
+    const matches = certifications.filter((c) =>
+      /\b(ia|ai)\b|inteligenc|artificial|big data|data|analytics/.test(
+        `${normalize(c.title)} ${normalize(c.issuer)}`,
+      ),
+    );
+    if (matches.length) {
+      return `Sí: ${matches.map(fmt).join('; ')}.${listSection}`;
+    }
+    return `No tengo certificaciones específicas de ese tema. Sus certificaciones publicadas son: ${certifications.map(fmt).join('; ')}.`;
+  }
+
+  const specific = certifications.find(
+    (c) => q.includes(normalize(c.issuer)) || q.includes(normalize(c.title)),
+  );
+  if (specific) {
+    return `Tiene ${fmt(specific)}.${listSection}`;
+  }
+
+  const plural = certifications.length > 1;
+  return `${plural ? 'Sus certificaciones' : 'Su certificación'}: ${certifications
+    .map(fmt)
+    .join('; ')}.${listSection}`;
 }
 
 function experienceAnswer() {
@@ -150,6 +188,11 @@ export function getLocalResponse(rawQuestion) {
 
   if (has(q, ['sabe', 'sabes', 'domina', 'conoce'])) {
     return 'Esa tecnología no aparece reflejada en su portfolio. Sus tecnologías y herramientas están en la página /tecnologias.';
+  }
+
+  // Certificaciones
+  if (has(q, ['certificado', 'certificacion', 'certificacione', 'credencial', 'credly', 'badge'])) {
+    return certificationsAnswer(q);
   }
 
   // Formación
