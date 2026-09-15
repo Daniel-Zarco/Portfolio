@@ -69,7 +69,18 @@ export function ProjectsSection() {
                       ))}
                     </ul>
                     <div className="work-item-links">
-                      {project.link && project.link !== '#' && (
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="chip-link"
+                          data-cursor
+                        >
+                          GitHub <span className="chip-link-arrow">↗</span>
+                        </a>
+                      )}
+                      {project.link && project.link !== '#' && !project.github && (
                         <a
                           href={project.link}
                           target="_blank"
@@ -88,7 +99,8 @@ export function ProjectsSection() {
                           className="chip-link"
                           data-cursor
                         >
-                          Demo <span className="chip-link-arrow">↗</span>
+                          {project.demoLabel || 'Demo'}{' '}
+                          <span className="chip-link-arrow">↗</span>
                         </a>
                       )}
                     </div>
