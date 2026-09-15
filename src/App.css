@@ -245,7 +245,8 @@
   display: inline-block;
   font-size: 0.9rem;
   color: var(--color-white);
-  padding: 0.25rem 0 1rem;
+  padding: 0.6rem 0;
+  transform: translateY(0.12rem);
 }
 
 .nav-link-inner {
@@ -275,7 +276,7 @@
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0.15em;
+  bottom: -0.35rem;
   left: 50%;
   width: 0.32em;
   height: 0.32em;
@@ -2182,13 +2183,5 @@
 @media (min-width: 1025px) {
   .nav-logo-img {
     height: 2rem;
-  }
-
-  .nav-link {
-    padding: 0.6rem 0 0.6rem;
-  }
-
-  .nav-link::after {
-    bottom: -0.35rem;
   }
 }
