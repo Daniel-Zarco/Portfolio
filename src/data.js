@@ -47,7 +47,7 @@ export const projects = [
     description:
       'Aplicación web desarrollada como TFG centrada en datos históricos de Fórmula 1 desde 1950 hasta la actualidad, con visualización interactiva de estadísticas, resultados y enfoque en experiencia de usuario.',
     tech: ['JavaScript', 'HTML', 'CSS', 'SQL', 'Frontend'],
-    status: 'TFG',
+    status: 'En desarrollo',
     link: 'https://github.com/Daniel-Zarco/todoF1-2025',
     demo: null,
   },

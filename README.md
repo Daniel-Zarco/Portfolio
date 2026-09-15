@@ -43,7 +43,7 @@ React 19 · Vite 8 · React Router 7 · CSS custom (sin frameworks UI) · ESLint
 | # | Proyecto | Estado | Stack | Enlaces |
 | --- | --- | --- | --- | --- |
 | 01 | **MiCarro** — gestión de la compra (cesta, favoritos, productos) | En desarrollo | Angular · Spring Boot · Java · PostgreSQL · REST · JPA | [Demo ↗](https://micarro-j0jf.onrender.com/) · [GitHub ↗](https://github.com/Daniel-Zarco/MiCarro) |
-| 02 | **TodoF1** — estadísticas históricas de F1 (TFG) | TFG | JavaScript · HTML · CSS · SQL | [GitHub ↗](https://github.com/Daniel-Zarco/todoF1-2025) |
+| 02 | **TodoF1** — estadísticas históricas de F1 (TFG) | En desarrollo | JavaScript · HTML · CSS · SQL | [GitHub ↗](https://github.com/Daniel-Zarco/todoF1-2025) |
 | 03 | **FitCity AI** — fitness geolocalizado con validación por IA | En desarrollo | Angular · JavaScript · IA · Geolocalización | — |
 | 04 | **Proyecto UNED** — base de datos de Patrimonio Cultural | Colaboración | Drupal · Bases de datos · Contenidos | [UNED ↗](https://www.uned.es/universidad/inicio/) |
 
