@@ -45,11 +45,15 @@ const has = (question, terms) => terms.some((term) => question.includes(term));
 const allSkills = [...Object.values(skills).flat(), ...hero.stack];
 const flatSkills = [...new Set(allSkills.map((item) => normalize(item)))];
 
+const todoF1Project = projects.find((p) => p.title === 'TodoF1');
+
 function projectDetail(question) {
   const map = [
     {
       keys: ['todof1', 'todo f1', 'el proyecto de formula', 'proyecto de f1', ' de f1'],
-      answer: `TodoF1 es su TFG: una aplicación web sobre datos históricos de Fórmula 1 desde 1950 hasta hoy, con estadísticas y resultados interactivos. Tecnologías: JavaScript, HTML, CSS y SQL.`,
+      answer: todoF1Project
+        ? `TodoF1: ${todoF1Project.description} Stack: ${todoF1Project.tech.join(', ')}.`
+        : 'TodoF1 es una plataforma web de datos históricos de Fórmula 1.',
     },
     {
       keys: ['fitcity', 'fit city', 'fit'],
