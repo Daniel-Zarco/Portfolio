@@ -1,85 +1,62 @@
 # Daniel Zarco Sastre — Portfolio
 
-Desarrollador **Full-Stack** con foco en lógica de negocio y datos. Este portfolio multipágina muestra mis proyectos, experiencia, tecnologías, formación y certificaciones, con una estética limpia y editorial, animaciones cuidadas y un chatbot capaz de responder preguntas sobre mi perfil usando el propio contenido del sitio.
-
-## Captura del portfolio
+Desarrollador **Full-Stack** en Madrid, con foco en lógica de negocio, automatización y datos. Este portfolio multipágina reúne mis proyectos, experiencia, tecnologías, formación y certificaciones — e incluye un chatbot que responde sobre mi perfil.
 
 ![Vista previa de la Home del portfolio](public/readme/portfolio-preview.png)
 
 [Ver portfolio en vivo ↗](https://portfolio-dzs.vercel.app/)
 
-## Sobre el portfolio
-
-SPA multipágina construida con **React + Vite**, desplegada en **Vercel**. El contenido está centralizado en `src/data.js`, de modo que proyectos, experiencia, tecnologías o certificaciones se actualizan editando un único fichero.
-
-| Ruta | Sección |
-| --- | --- |
-| `/` | Home — presentación y lista de proyectos |
-| `/sobre-mi` | Bio, perfil y áreas de enfoque |
-| `/experiencia` | Trayectoria profesional |
-| `/proyectos` | Proyectos + sección de **Certificaciones** |
-| `/tecnologias` | Stack por bloques + formación académica |
-
-## Tecnologías utilizadas
+## Tecnologías
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=141517)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=for-the-badge&logo=javascript&logoColor=141517)
-![CSS3](https://img.shields.io/badge/CSS-Custom%20Properties-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS-Custom-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-7-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 
-- **React 19** + **Vite 8** (build tooling)
-- **React Router 7** para el enrutado multipágina
-- **CSS vanilla** con variables de diseño, animaciones e IntersectionObserver (sin frameworks UI)
-- **@vercel/analytics** para métricas de la web
-- **ESLint 9** para calidad de código
-- Despliegue en **Vercel** con rewrites SPA (`vercel.json`)
+React 19 · Vite 8 · React Router 7 · CSS custom (sin frameworks UI) · ESLint 9 · Despliegue en Vercel (rewrites SPA + Analytics). Contenido centralizado en un único módulo de datos.
 
 ## Funcionalidades principales
 
-- **Portfolio multipágina** con navegación por transiciones animadas (overlay + clip-path)
-- **Diseño responsive**: navbar fijo en escritorio y **menú móvil a pantalla completa** con bloqueo de scroll
-- **Animaciones y micro-interacciones**: preloader con barra de progreso, textos que se dividen por caracteres, reveals al hacer scroll, hovers deslizantes en enlaces y botones
-- **Cursor personalizado** en escritorio (dot + ring con blend por contraste)
-- **Proyectos**: listado con descripción, stack, enlaces a repo/demo y estados (`En desarrollo`, `TFG`, …)
-- **Certificaciones**: grid de credenciales verificables (Credly) en `/proyectos`
-- **Chatbot con contexto del portfolio**: responde sobre perfil, experiencia, proyectos, tecnologías, formación, certificaciones o contacto a partir de `src/data.js`; preparado para conectar una API propia vía `VITE_CHAT_API_URL` con fallback local (sin claves en el frontend)
+- **Portfolio multipágina** con transiciones animadas y reveals al hacer scroll
+- **Diseño responsive** con menú móvil a pantalla completa
+- **Proyectos** con estado, stack y enlaces, más sección de **Certificaciones** con credenciales verificables
+- **Chatbot** que responde sobre mi perfil, experiencia, proyectos, tecnologías, formación o certificaciones usando el contenido real del portfolio (sin claves en el frontend)
+- Preloader, cursor personalizado y micro-interacciones en hovers
+
+## Rutas
+
+| Ruta | Contenido |
+| --- | --- |
+| `/` | Home — presentación y proyectos |
+| `/sobre-mi` | Bio, perfil y áreas de enfoque |
+| `/experiencia` | Trayectoria profesional |
+| `/proyectos` | Proyectos + Certificaciones |
+| `/tecnologias` | Stack por bloques + formación |
+
+> 📧 Los datos de contacto (email, teléfono, GitHub, LinkedIn) están en el **footer**, presentes en todas las páginas.
 
 ## Proyectos destacados
 
 | # | Proyecto | Estado | Stack | Enlaces |
 | --- | --- | --- | --- | --- |
-| 01 | **MiCarro** | En desarrollo | Angular · Spring Boot · Java · PostgreSQL · REST API · JPA | [Ver proyecto ↗](https://micarro-j0jf.onrender.com/) · [GitHub ↗](https://github.com/Daniel-Zarco/MiCarro) |
-| 02 | **TodoF1** | TFG | JavaScript · HTML · CSS · SQL | [GitHub ↗](https://github.com/Daniel-Zarco/todoF1-2025) |
-| 03 | **FitCity AI** | En desarrollo | Angular · JavaScript · IA · Geolocalización · Git | — |
-| 04 | **Proyecto UNED** | Colaboración técnica | Drupal · Base de datos · Gestión de contenidos | [UNED ↗](https://www.uned.es/universidad/inicio/) |
+| 01 | **MiCarro** — gestión de la compra (cesta, favoritos, productos) | En desarrollo | Angular · Spring Boot · Java · PostgreSQL · REST · JPA | [Demo ↗](https://micarro-j0jf.onrender.com/) · [GitHub ↗](https://github.com/Daniel-Zarco/MiCarro) |
+| 02 | **TodoF1** — estadísticas históricas de F1 (TFG) | TFG | JavaScript · HTML · CSS · SQL | [GitHub ↗](https://github.com/Daniel-Zarco/todoF1-2025) |
+| 03 | **FitCity AI** — fitness geolocalizado con validación por IA | En desarrollo | Angular · JavaScript · IA · Geolocalización | — |
+| 04 | **Proyecto UNED** — base de datos de Patrimonio Cultural | Colaboración | Drupal · Bases de datos · Contenidos | [UNED ↗](https://www.uned.es/universidad/inicio/) |
 
-## Instalación y ejecución local
-
-> Requiere **Node 20.19+** o **22.12+** (exigencia de Vite 8).
+## Instalación
 
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/Daniel-Zarco/Portfolio.git
-cd Portfolio
-
-# 2. Instalar dependencias
+git clone https://github.com/Daniel-Zarco/Portfolio.git && cd Portfolio
 npm install
-
-# 3. Entorno de desarrollo (HMR)
-npm run dev
-
-# 4. Build de producción + preview local
-npm run build
-npm run preview
-
-# 5. Lint
-npm run lint
+npm run dev        # desarrollo
+npm run build      # producción → dist/
 ```
 
-Opcional: para conectar el chatbot a una API de IA propia, define `VITE_CHAT_API_URL` en un `.env.local` (sin ella, el chatbot usa respuestas locales basadas en el contenido del portfolio).
+> Node 20.19+ o 22.12+ (requisito de Vite 8). Scripts extra: `npm run preview`, `npm run lint`.
 
 ## Enlaces
 
