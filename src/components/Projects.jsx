@@ -88,7 +88,8 @@ export function ProjectsSection() {
                           className="chip-link"
                           data-cursor
                         >
-                          GitHub <span className="chip-link-arrow">↗</span>
+                          {project.linkLabel || 'GitHub'}{' '}
+                          <span className="chip-link-arrow">↗</span>
                         </a>
                       )}
                       {project.demo && (

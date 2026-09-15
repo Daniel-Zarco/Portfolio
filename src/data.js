@@ -67,6 +67,7 @@ export const projects = [
     tech: ['Drupal', 'Base de datos', 'Gestión de contenidos', 'Datos'],
     status: 'Colaboración técnica',
     link: 'https://www.uned.es/universidad/inicio/',
+    linkLabel: 'Ver proyecto',
     demo: null,
   },
 ];
