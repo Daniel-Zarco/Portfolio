@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import SobreMi from './pages/SobreMi';
 import Experiencia from './pages/Experiencia';
 import Proyectos from './pages/Proyectos';
-import ProyectoTodoF1 from './pages/ProyectoTodoF1';
+import ProyectoDetalle from './pages/ProyectoDetalle';
 import Tecnologias from './pages/Tecnologias';
 import './App.css';
 
@@ -54,7 +54,7 @@ export default function App() {
               <Route path="/sobre-mi" element={<SobreMi />} />
               <Route path="/experiencia" element={<Experiencia />} />
               <Route path="/proyectos" element={<Proyectos />} />
-              <Route path="/proyectos/todof1" element={<ProyectoTodoF1 />} />
+              <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
               <Route path="/tecnologias" element={<Tecnologias />} />
             </Route>
           </Routes>

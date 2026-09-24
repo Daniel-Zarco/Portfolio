@@ -1,6 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
 import { projects, sectionsIntro } from '../data';
-import { usePageTransition } from '../context/TransitionContext';
 
 function ArrowUpRight() {
   return (
@@ -26,26 +24,7 @@ function SectionHeading({ badge, title, description }) {
 
 export { SectionHeading };
 
-function useDetailNav() {
-  const transitionTo = usePageTransition();
-  const location = useLocation();
-
-  const go = (to) => (e) => {
-    if (!to.startsWith('/')) return;
-    e.preventDefault();
-    if (to === location.pathname) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    transitionTo?.(to);
-  };
-
-  return { go };
-}
-
 export function ProjectsSection() {
-  const { go } = useDetailNav();
-
   return (
     <section id="proyectos" className="section">
       <div className="section-inner">
@@ -57,17 +36,14 @@ export function ProjectsSection() {
 
         <ul className="work-list">
           {projects.map((project, i) => {
-            const isDetail = project.detail && project.detail.startsWith('/');
-            const isLink = project.link && project.link !== '#' && !isDetail;
-            const Tag = isDetail ? Link : isLink ? 'a' : 'div';
+            const isLink = project.link && project.link !== '#';
+            const Tag = isLink ? 'a' : 'div';
 
             return (
               <li key={project.title} className="work-item" data-reveal data-cursor>
                 <Tag
                   className="work-item-link"
-                  {...(isDetail
-                    ? { to: project.detail, onClick: go(project.detail) }
-                    : isLink
+                  {...(isLink
                     ? { href: project.link, target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
                 >

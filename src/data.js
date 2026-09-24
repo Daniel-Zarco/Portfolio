@@ -41,6 +41,14 @@ export const projects = [
     github: 'https://github.com/Daniel-Zarco/MiCarro',
     demo: 'https://micarro-j0jf.onrender.com/',
     demoLabel: 'Ver proyecto',
+    slug: 'micarro',
+    about:
+      'MiCarro es una aplicación web full-stack para gestionar la compra de forma sencilla. Ofrece productos, favoritos y funcionalidades orientadas a organizar y facilitar la cesta de la compra.',
+    features: [
+      'Gestionar la compra de forma sencilla.',
+      'Productos y favoritos.',
+      'Funcionalidades para organizar y facilitar la cesta de la compra.',
+    ],
   },
   {
     title: 'TodoF1',
@@ -48,9 +56,16 @@ export const projects = [
       'Plataforma web dedicada a la Fórmula 1 que permite explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad, consultar clasificaciones y descubrir estadísticas y datos históricos de cada temporada.',
     tech: ['JavaScript', 'HTML', 'CSS', 'SQL', 'Frontend'],
     status: 'En desarrollo',
+    slug: 'todof1',
     link: 'https://github.com/Daniel-Zarco/todoF1-2025',
-    detail: '/proyectos/todof1',
     demo: null,
+    about:
+      'TodoF1 es una plataforma web dedicada a la Fórmula 1. Su objetivo es permitir explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad, consultar clasificaciones y descubrir estadísticas y datos históricos de cada temporada.',
+    features: [
+      'Explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad.',
+      'Consultar clasificaciones de cada temporada.',
+      'Descubrir estadísticas y datos históricos de cada temporada.',
+    ],
   },
   {
     title: 'FitCity AI',
@@ -58,8 +73,17 @@ export const projects = [
       'Aplicación geolocalizada orientada al fitness, con registro y análisis de ejercicios, rankings por gimnasio y tipo de ejercicio, e integración progresiva de funcionalidades basadas en Inteligencia Artificial para validar movimientos.',
     tech: ['Angular', 'JavaScript', 'IA', 'Geolocalización', 'Git'],
     status: 'En desarrollo',
+    slug: 'fitcity-ai',
     link: null,
     demo: null,
+    about:
+      'FitCity AI es una aplicación geolocalizada orientada al fitness. Permite registrar y analizar ejercicios, consultar rankings por gimnasio y tipo de ejercicio, e integra progresivamente funcionalidades de Inteligencia Artificial para validar movimientos.',
+    features: [
+      'Geolocalización orientada al fitness.',
+      'Registro y análisis de ejercicios.',
+      'Rankings por gimnasio y tipo de ejercicio.',
+      'Integración progresiva de funcionalidades de IA para validar movimientos.',
+    ],
   },
   {
     title: 'Proyecto UNED',

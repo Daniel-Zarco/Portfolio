@@ -1,19 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { usePage } from '../hooks/usePage';
 import { projects } from '../data';
 
-const project = projects.find((p) => p.title === 'TodoF1');
-
-const features = [
-  'Explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad.',
-  'Consultar clasificaciones de cada temporada.',
-  'Descubrir estadísticas y datos históricos de cada temporada.',
-];
-
-export default function ProyectoTodoF1() {
+export default function ProyectoDetalle() {
   usePage();
 
-  if (!project) return null;
+  const { slug } = useParams();
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return (
+      <div className="page pd">
+        <section className="section pd-hero">
+          <div className="section-inner">
+            <span className="section-badge" data-reveal>
+              <span className="section-badge-dot" />
+              Proyecto
+            </span>
+            <h1 className="pd-title" data-reveal>
+              Proyecto no encontrado
+            </h1>
+            <div className="pd-links-row" data-reveal>
+              <Link to="/proyectos" className="pd-back" data-cursor>
+                <span className="pd-back-arrow">←</span> Volver a proyectos
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="page pd">
@@ -40,15 +56,17 @@ export default function ProyectoTodoF1() {
                 </li>
               ))}
             </ul>
-            <a
-              className="chip-link"
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor
-            >
-              GitHub <span className="chip-link-arrow">↗</span>
-            </a>
+            {(project.github || project.link) && (
+              <a
+                className="chip-link"
+                href={project.github || project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor
+              >
+                GitHub <span className="chip-link-arrow">↗</span>
+              </a>
+            )}
           </div>
         </div>
       </section>
@@ -60,7 +78,7 @@ export default function ProyectoTodoF1() {
           </h2>
           <div className="pd-preview-frame" data-reveal>
             <span className="pd-preview-note">
-              Espacio reservado para la captura de TodoF1
+              Espacio reservado para la captura de {project.title}
             </span>
           </div>
         </div>
@@ -72,10 +90,7 @@ export default function ProyectoTodoF1() {
             Sobre el proyecto
           </h2>
           <p className="pd-text" data-reveal>
-            TodoF1 es una plataforma web dedicada a la Fórmula 1. Su objetivo es
-            permitir explorar temporadas, pilotos y equipos desde 1970 hasta la
-            actualidad, consultar clasificaciones y descubrir estadísticas y datos
-            históricos de cada temporada.
+            {project.about}
           </p>
         </div>
       </section>
@@ -86,7 +101,7 @@ export default function ProyectoTodoF1() {
             Funcionalidades
           </h2>
           <ul className="pd-features-list">
-            {features.map((f, i) => (
+            {project.features.map((f, i) => (
               <li key={i} data-reveal data-reveal-delay={`${i * 80}`}>
                 <span className="pd-feature-dot" />
                 {f}
@@ -119,15 +134,29 @@ export default function ProyectoTodoF1() {
       <section className="section pd-links">
         <div className="section-inner">
           <div className="pd-links-row" data-reveal>
-            <a
-              className="chip-link"
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor
-            >
-              GitHub <span className="chip-link-arrow">↗</span>
-            </a>
+            {(project.github || project.link) && (
+              <a
+                className="chip-link"
+                href={project.github || project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor
+              >
+                GitHub <span className="chip-link-arrow">↗</span>
+              </a>
+            )}
+            {project.demo && (
+              <a
+                className="chip-link"
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor
+              >
+                {project.demoLabel || 'Ver proyecto'}{' '}
+                <span className="chip-link-arrow">↗</span>
+              </a>
+            )}
             <Link to="/proyectos" className="pd-back" data-cursor>
               <span className="pd-back-arrow">←</span> Volver a proyectos
             </Link>
