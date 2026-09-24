@@ -881,7 +881,7 @@
 .work-item-meta {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 2rem;
+  gap: 1rem;
   align-items: start;
   padding: 0 0 2rem 4.5rem;
   max-height: 0;
@@ -897,13 +897,19 @@
 }
 
 .work-item-meta--half {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 50%);
+  grid-template-columns: minmax(0, 1fr) minmax(min-content, 50%);
+}
+
+@media (min-width: 1180px) {
+  .work-item-meta--half {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
 }
 
 .work-item-desc {
   font-size: 0.95rem;
   color: var(--color-text);
-  max-width: 48rem;
+  max-width: 60rem;
 }
 
 .work-item-tech-row {
