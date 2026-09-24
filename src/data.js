@@ -41,7 +41,6 @@ export const projects = [
     github: 'https://github.com/Daniel-Zarco/MiCarro',
     demo: 'https://micarro-j0jf.onrender.com/',
     demoLabel: 'Ver proyecto',
-    techHalf: true,
   },
   {
     title: 'TodoF1',
