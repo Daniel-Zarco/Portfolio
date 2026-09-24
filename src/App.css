@@ -896,6 +896,10 @@
   padding-top: 0.5rem;
 }
 
+.work-item-meta--half {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 50%);
+}
+
 .work-item-desc {
   font-size: 0.95rem;
   color: var(--color-text);

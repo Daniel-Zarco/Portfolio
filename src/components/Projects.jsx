@@ -58,7 +58,9 @@ export function ProjectsSection() {
                   </span>
                 </Tag>
 
-                <div className="work-item-meta">
+                <div
+                  className={`work-item-meta${project.techHalf ? ' work-item-meta--half' : ''}`}
+                >
                   <p className="work-item-desc">{project.description}</p>
                   <div className="work-item-tech-row">
                     <ul className="work-item-tech">
