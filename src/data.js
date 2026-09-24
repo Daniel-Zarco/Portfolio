@@ -49,6 +49,7 @@ export const projects = [
     tech: ['JavaScript', 'HTML', 'CSS', 'SQL', 'Frontend'],
     status: 'En desarrollo',
     link: 'https://github.com/Daniel-Zarco/todoF1-2025',
+    detail: '/proyectos/todof1',
     demo: null,
   },
   {
