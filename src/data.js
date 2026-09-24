@@ -83,6 +83,13 @@ export const certifications = [
     url: 'https://www.credly.com/earner/earned/badge/a4b54a7a-d28f-41fd-a030-81122620cfad',
     image: '/certificates/ibm-artificial-intelligence-fundamentals.png',
   },
+  {
+    issuer: 'IBM SkillsBuild',
+    title: 'Cloud Computing Fundamentals',
+    date: 'Sep 24, 2026',
+    url: 'https://www.credly.com/badges/0219c715-a18b-4156-8fb2-10cf257a354e',
+    image: '/certificates/cloud-computing-fundamentals.png',
+  },
 ];
 
 export const about = {
