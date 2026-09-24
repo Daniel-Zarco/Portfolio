@@ -97,6 +97,13 @@ export const certifications = [
     url: 'https://www.credly.com/badges/fb42d9c0-10db-44bb-afbb-7412d3ccb2c2',
     image: '/certificates/cybersecurity-fundamentals.png',
   },
+  {
+    issuer: 'IBM SkillsBuild',
+    title: 'Data Fundamentals',
+    date: 'Sep 24, 2026',
+    url: 'https://www.credly.com/badges/42ece03d-3dc4-448b-84d1-9b3cfaec3c38',
+    image: '/certificates/data-fundamentals.png',
+  },
 ];
 
 export const about = {
