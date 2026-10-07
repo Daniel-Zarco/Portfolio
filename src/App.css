@@ -2946,12 +2946,13 @@
 @media (max-width: 768px) {
   .mc-modal {
     align-items: start;
-    overflow: auto;
-    padding: 0.75rem;
+    overflow: hidden;
+    padding: 100px 14px 18px;
   }
 
   .mc-modal-panel {
-    max-height: none;
+    max-height: calc(100vh - 118px);
+    max-height: calc(100dvh - 118px);
     border-radius: 1rem;
     padding: 1.25rem;
   }

@@ -16,7 +16,7 @@ const features = [
     n: '01',
     title: 'Catálogo',
     text: 'Búsqueda, categorías, filtros y paginación.',
-    desktop: '/project-previews/micarro.png',
+    desktop: '/project-previews/DCatalogo.png',
     mobile: '/project-previews/MCatalogo.png',
   },
   {
