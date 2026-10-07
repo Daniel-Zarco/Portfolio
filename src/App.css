@@ -2753,7 +2753,7 @@
 
 .mc .mc-hero {
   padding-top: clamp(6rem, 14vh, 9rem);
-  padding-bottom: 1.25rem;
+  padding-bottom: 2rem;
 }
 
 .mc .mc-h2 {
@@ -2777,6 +2777,6 @@
 
   .mc .mc-hero {
     padding-top: 3.5rem;
-    padding-bottom: 1.125rem;
+    padding-bottom: 1.875rem;
   }
 }
