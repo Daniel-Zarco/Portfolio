@@ -2743,3 +2743,40 @@
     transform: rotate(90deg);
   }
 }
+
+
+/* ---------- MiCarro: espaciado vertical refinado ---------- */
+.mc .section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.mc .mc-hero {
+  padding-top: clamp(6rem, 14vh, 9rem);
+  padding-bottom: 2rem;
+}
+
+.mc .mc-h2 {
+  margin-bottom: clamp(1.5rem, 3vh, 2.25rem);
+}
+
+.mc .mc-status,
+.mc .mc-lead {
+  margin-bottom: 2rem;
+}
+
+.mc .mc-motor-text {
+  margin-top: 2.25rem;
+}
+
+@media (max-width: 768px) {
+  .mc .section {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .mc .mc-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 1.75rem;
+  }
+}
