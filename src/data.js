@@ -36,7 +36,7 @@ export const projects = [
     description:
       'Aplicación web full-stack para gestionar la compra de forma sencilla, con productos, favoritos y funcionalidades orientadas a organizar y facilitar la cesta de la compra.',
     tech: ['Angular', 'Spring Boot', 'Java', 'PostgreSQL', 'REST API', 'JPA'],
-    status: 'En desarrollo',
+    status: 'Desplegado',
     link: 'https://micarro-j0jf.onrender.com/',
     github: 'https://github.com/Daniel-Zarco/MiCarro',
     demo: 'https://micarro-j0jf.onrender.com/',
