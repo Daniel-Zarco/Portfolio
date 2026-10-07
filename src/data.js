@@ -38,6 +38,7 @@ export const projects = [
     tech: ['Angular', 'Spring Boot', 'Java', 'PostgreSQL', 'REST API', 'JPA'],
     status: 'Desplegado',
     link: 'https://micarro-j0jf.onrender.com/',
+    detail: '/proyectos/micarro',
     github: 'https://github.com/Daniel-Zarco/MiCarro',
     demo: 'https://micarro-j0jf.onrender.com/',
     demoLabel: 'Ver proyecto',
