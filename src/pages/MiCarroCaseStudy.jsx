@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { usePage } from '../hooks/usePage';
 import { projects } from '../data';
@@ -11,12 +12,48 @@ const facts = [
 ];
 
 const features = [
-  { n: '01', title: 'Catálogo', text: 'Búsqueda, categorías, filtros y paginación.' },
-  { n: '02', title: 'Planificador', text: 'Propuestas según presupuesto, productos y preferencias.' },
-  { n: '03', title: 'Novedades', text: 'Nuevos productos y variaciones reales de precio.' },
-  { n: '04', title: 'Carrito', text: 'Cantidades y total automático.' },
-  { n: '05', title: 'Favoritos', text: 'Asociados al usuario autenticado.' },
-  { n: '06', title: 'Planes guardados', text: 'Guardar y gestionar planes de compra.' },
+  {
+    n: '01',
+    title: 'Catálogo',
+    text: 'Búsqueda, categorías, filtros y paginación.',
+    desktop: '/project-previews/micarro.png',
+    mobile: '/project-previews/MCatalogo.png',
+  },
+  {
+    n: '02',
+    title: 'Planificador',
+    text: 'Propuestas según presupuesto, productos y preferencias.',
+    desktop: '/project-previews/DPlanificador.png',
+    mobile: '/project-previews/MPlanificador.png',
+  },
+  {
+    n: '03',
+    title: 'Novedades',
+    text: 'Nuevos productos y variaciones reales de precio.',
+    desktop: '/project-previews/DNovedades.jpg',
+    mobile: '/project-previews/MNovedades.png',
+  },
+  {
+    n: '04',
+    title: 'Carrito',
+    text: 'Cantidades y total automático.',
+    desktop: '/project-previews/DCarrito.png',
+    mobile: '/project-previews/MCarrito.png',
+  },
+  {
+    n: '05',
+    title: 'Favoritos',
+    text: 'Asociados al usuario autenticado.',
+    desktop: '/project-previews/DFavoritos.png',
+    mobile: '/project-previews/MFavoritos.png',
+  },
+  {
+    n: '06',
+    title: 'Planes guardados',
+    text: 'Guardar y gestionar planes de compra.',
+    desktop: '/project-previews/DPlanes.png',
+    mobile: '/project-previews/MPlanes.png',
+  },
 ];
 
 const planFlow = [
@@ -74,6 +111,47 @@ const stack = [
 export default function MiCarroCaseStudy() {
   usePage();
 
+  const [active, setActive] = useState(null);
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const previousActive = document.activeElement;
+    document.body.style.overflow = 'hidden';
+    panelRef.current?.focus();
+
+    const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setActive(null);
+        return;
+      }
+      if (event.key === 'Tab' && panelRef.current) {
+        const focusables = panelRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', onKey);
+
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      if (previousActive instanceof HTMLElement) previousActive.focus();
+    };
+  }, [active]);
+
   if (!project) return null;
 
   return (
@@ -92,9 +170,10 @@ export default function MiCarroCaseStudy() {
             {project.status}
           </p>
           <p className="mc-lead" data-reveal>
-            Aplicación web Full-Stack para planificar compras de supermercado a
-            partir de un catálogo real, con carrito, favoritos y un motor que
-            genera propuestas de compra según presupuesto y preferencias.
+            Aplicación Full-Stack para la gestión y planificación de compras, con
+            un motor de selección y optimización que genera propuestas sobre un
+            catálogo real en función del presupuesto y las preferencias del
+            usuario.
           </p>
           <div className="mc-hero-meta" data-reveal>
             <ul className="mc-tech">
@@ -184,16 +263,20 @@ export default function MiCarroCaseStudy() {
           </h2>
           <div className="mc-features-grid">
             {features.map((f, i) => (
-              <article
+              <button
                 key={f.n}
+                type="button"
                 className="mc-feature"
+                onClick={() => setActive(f)}
+                aria-haspopup="dialog"
                 data-reveal
                 data-reveal-delay={`${(i % 3) * 70}`}
               >
                 <span className="mc-feature-n">{f.n}</span>
                 <h3>{f.title}</h3>
                 <p>{f.text}</p>
-              </article>
+                <span className="mc-feature-cta">Ver funcionalidad ↗</span>
+              </button>
             ))}
           </div>
         </div>
@@ -341,6 +424,44 @@ export default function MiCarroCaseStudy() {
           </div>
         </div>
       </section>
+
+      {/* ============ MODAL FUNCIONALIDAD ============ */}
+      {active && (
+        <div
+          className="mc-modal"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setActive(null);
+          }}
+        >
+          <div
+            className="mc-modal-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${active.n} · ${active.title}`}
+            ref={panelRef}
+            tabIndex={-1}
+          >
+            <button
+              type="button"
+              className="mc-modal-close"
+              onClick={() => setActive(null)}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+            <span className="mc-modal-kicker">{active.n}</span>
+            <h3 className="mc-modal-title">{active.title}</h3>
+            <picture>
+              <source media="(min-width: 769px)" srcSet={active.desktop} />
+              <img
+                src={active.mobile}
+                alt={`Captura de ${active.title} en MiCarro`}
+              />
+            </picture>
+            <p className="mc-modal-text">{active.text}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
