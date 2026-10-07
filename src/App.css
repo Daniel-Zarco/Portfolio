@@ -2780,3 +2780,15 @@
     padding-bottom: 1.875rem;
   }
 }
+
+
+/* ---------- MiCarro: Vista previa respira respecto al Hero ---------- */
+.mc .mc-preview {
+  padding-top: calc(1.875rem + 35px);
+}
+
+@media (max-width: 768px) {
+  .mc .mc-preview {
+    padding-top: calc(1.125rem + 35px);
+  }
+}
