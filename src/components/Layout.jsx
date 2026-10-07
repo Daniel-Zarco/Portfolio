@@ -15,6 +15,7 @@ import { navLinks, name } from '../data';
 const PAGE_LABELS = {
   '/': name,
   ...Object.fromEntries(navLinks.map((l) => [l.href, l.label])),
+  '/proyectos/micarro': 'MiCarro',
 };
 
 const ENTER_MS = 520;
