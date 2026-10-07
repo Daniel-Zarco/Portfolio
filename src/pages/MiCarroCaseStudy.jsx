@@ -62,16 +62,16 @@ const planFlow = [
     text: 'El usuario define qué necesita y establece su presupuesto.',
   },
   {
-    title: 'Búsqueda de candidatos',
+    title: 'Búsqueda de productos',
     text: 'El sistema localiza productos compatibles mediante distintos niveles de coincidencia.',
   },
   {
     title: 'Evaluación y scoring',
-    text: 'Cada candidato recibe una puntuación según relevancia, precio y preferencias.',
+    text: 'Cada producto recibe una puntuación según relevancia, precio y preferencias.',
   },
   {
     title: 'Estrategia de compra',
-    text: 'Los pesos del scoring se ajustan según el modo de compra seleccionado.',
+    text: 'El sistema adapta la selección al modo elegido: Ahorrar, Equilibrada o Calidad.',
   },
   {
     title: 'Optimización del presupuesto',
@@ -349,8 +349,8 @@ export default function MiCarroCaseStudy() {
           <p className="mc-motor-text" data-reveal>
             El motor transforma la lista del usuario en una propuesta de compra
             mediante un proceso de búsqueda, evaluación y selección de
-            productos. La estrategia elegida modifica cómo se ponderan los
-            candidatos y, finalmente, el resultado se optimiza para respetar el
+            productos. El modo de compra elegido determina cómo se priorizan los
+            resultados y, finalmente, la selección se optimiza para respetar el
             presupuesto establecido.
           </p>
         </div>
