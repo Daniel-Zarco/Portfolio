@@ -8,6 +8,7 @@ import SobreMi from './pages/SobreMi';
 import Experiencia from './pages/Experiencia';
 import Proyectos from './pages/Proyectos';
 import ProyectoDetalle from './pages/ProyectoDetalle';
+import MiCarroCaseStudy from './pages/MiCarroCaseStudy';
 import Tecnologias from './pages/Tecnologias';
 import './App.css';
 
@@ -54,6 +55,7 @@ export default function App() {
               <Route path="/sobre-mi" element={<SobreMi />} />
               <Route path="/experiencia" element={<Experiencia />} />
               <Route path="/proyectos" element={<Proyectos />} />
+              <Route path="/proyectos/micarro" element={<MiCarroCaseStudy />} />
               <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
               <Route path="/tecnologias" element={<Tecnologias />} />
             </Route>
