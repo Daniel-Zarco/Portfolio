@@ -2628,6 +2628,13 @@
   letter-spacing: -0.01em;
 }
 
+.mc-motor-desc {
+  margin: 0.6rem 0 0;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
 .mc-motor-text {
   color: var(--color-text);
   font-size: 1rem;

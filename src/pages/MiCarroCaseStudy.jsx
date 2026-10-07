@@ -57,12 +57,30 @@ const features = [
 ];
 
 const planFlow = [
-  'Productos solicitados',
-  'Selección de candidatos',
-  'Scoring',
-  'Estrategia',
-  'Optimización del presupuesto',
-  'Propuesta de compra',
+  {
+    title: 'Productos solicitados',
+    text: 'El usuario define qué necesita y establece su presupuesto.',
+  },
+  {
+    title: 'Búsqueda de candidatos',
+    text: 'El sistema localiza productos compatibles mediante distintos niveles de coincidencia.',
+  },
+  {
+    title: 'Evaluación y scoring',
+    text: 'Cada candidato recibe una puntuación según relevancia, precio y preferencias.',
+  },
+  {
+    title: 'Estrategia de compra',
+    text: 'Los pesos del scoring se ajustan según el modo de compra seleccionado.',
+  },
+  {
+    title: 'Optimización del presupuesto',
+    text: 'La selección se ajusta para obtener una propuesta sin superar el presupuesto disponible.',
+  },
+  {
+    title: 'Propuesta final',
+    text: 'El usuario revisa el resultado generado antes de incorporarlo al carrito.',
+  },
 ];
 
 const devFront = [
@@ -322,18 +340,18 @@ export default function MiCarroCaseStudy() {
           </h2>
           <ol className="mc-motor-flow" data-reveal>
             {planFlow.map((step, i) => (
-              <li key={step} data-reveal data-reveal-delay={`${i * 60}`}>
-                <span className="mc-motor-step">{step}</span>
+              <li key={step.title} data-reveal data-reveal-delay={`${i * 60}`}>
+                <span className="mc-motor-step">{step.title}</span>
+                <p className="mc-motor-desc">{step.text}</p>
               </li>
             ))}
           </ol>
           <p className="mc-motor-text" data-reveal>
-            El motor busca candidatos por niveles de coincidencia con el término
-            solicitado, puntúa cada producto según relevancia, precio (relativo al
-            rango) y favoritos —combinados con los pesos de la estrategia
-            elegida— y finalmente ajusta la selección para que el total no supere
-            el presupuesto. El usuario revisa siempre la propuesta antes de
-            añadirla al carrito.
+            El motor transforma la lista del usuario en una propuesta de compra
+            mediante un proceso de búsqueda, evaluación y selección de
+            productos. La estrategia elegida modifica cómo se ponderan los
+            candidatos y, finalmente, el resultado se optimiza para respetar el
+            presupuesto establecido.
           </p>
         </div>
       </section>
