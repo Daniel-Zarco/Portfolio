@@ -9,6 +9,7 @@ import Experiencia from './pages/Experiencia';
 import Proyectos from './pages/Proyectos';
 import ProyectoDetalle from './pages/ProyectoDetalle';
 import MiCarroCaseStudy from './pages/MiCarroCaseStudy';
+import TodoF1CaseStudy from './pages/TodoF1CaseStudy';
 import Tecnologias from './pages/Tecnologias';
 import './App.css';
 
@@ -56,6 +57,7 @@ export default function App() {
               <Route path="/experiencia" element={<Experiencia />} />
               <Route path="/proyectos" element={<Proyectos />} />
               <Route path="/proyectos/micarro" element={<MiCarroCaseStudy />} />
+              <Route path="/proyectos/todof1" element={<TodoF1CaseStudy />} />
               <Route path="/proyectos/:slug" element={<ProyectoDetalle />} />
               <Route path="/tecnologias" element={<Tecnologias />} />
             </Route>

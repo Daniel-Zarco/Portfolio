@@ -54,18 +54,20 @@ export const projects = [
   {
     title: 'TodoF1',
     description:
-      'Plataforma web dedicada a la Fórmula 1 que permite explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad, consultar clasificaciones y descubrir estadísticas y datos históricos de cada temporada.',
-    tech: ['JavaScript', 'HTML', 'CSS', 'SQL', 'Frontend'],
-    status: 'En desarrollo',
+      'Plataforma web para explorar la Fórmula 1 temporada a temporada: pilotos, escuderías, circuitos, clasificaciones y estadísticas históricas, con datos de la API de Jolpica y una capa de respaldo en servidor.',
+    tech: ['PHP', 'Laravel', 'JavaScript', 'MariaDB', 'SQL', 'Chart.js'],
+    status: 'Desplegado',
     slug: 'todof1',
-    link: 'https://github.com/Daniel-Zarco/todoF1-2025',
-    demo: null,
+    link: 'https://todof1.alwaysdata.net/',
+    github: 'https://github.com/Daniel-Zarco/TodoF1',
+    demo: 'https://todof1.alwaysdata.net/',
+    demoLabel: 'Ver proyecto',
     about:
-      'TodoF1 es una plataforma web dedicada a la Fórmula 1. Su objetivo es permitir explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad, consultar clasificaciones y descubrir estadísticas y datos históricos de cada temporada.',
+      'TodoF1 reúne la información histórica de la Fórmula 1 en una plataforma web organizada por temporadas. Permite consultar pilotos, escuderías, circuitos, clasificaciones y estadísticas desde 1950 hasta la actualidad.',
     features: [
-      'Explorar temporadas, pilotos y equipos desde 1970 hasta la actualidad.',
-      'Consultar clasificaciones de cada temporada.',
-      'Descubrir estadísticas y datos históricos de cada temporada.',
+      'Explorar temporadas desde 1950 hasta la actualidad.',
+      'Consultar pilotos, escuderías, circuitos y clasificaciones.',
+      'Analizar estadísticas históricas y evolución del campeonato.',
     ],
   },
   {

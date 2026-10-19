@@ -16,6 +16,7 @@ const PAGE_LABELS = {
   '/': name,
   ...Object.fromEntries(navLinks.map((l) => [l.href, l.label])),
   '/proyectos/micarro': 'MiCarro',
+  '/proyectos/todof1': 'TodoF1',
 };
 
 const ENTER_MS = 520;
