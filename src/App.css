@@ -2873,6 +2873,10 @@
   animation: mcPanelIn 0.3s var(--ease-smooth);
 }
 
+.mc-modal--todof1 .mc-modal-body {
+  display: contents;
+}
+
 .mc-modal-close {
   position: absolute;
   top: 1rem;
@@ -2967,6 +2971,46 @@
   .mc-modal-close {
     top: 0.75rem;
     right: 0.75rem;
+  }
+
+  .mc-modal--todof1 {
+    align-items: center;
+    overflow: hidden;
+    padding:
+      calc(100px + env(safe-area-inset-top, 0px))
+      max(14px, env(safe-area-inset-right, 0px))
+      calc(18px + env(safe-area-inset-bottom, 0px))
+      max(14px, env(safe-area-inset-left, 0px));
+  }
+
+  .mc-modal--todof1 .mc-modal-panel {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(
+      100vh - 118px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+    );
+    max-height: calc(
+      100dvh - 118px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+    );
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 0;
+  }
+
+  .mc-modal--todof1 .mc-modal-body {
+    display: block;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.25rem;
+  }
+
+  .mc-modal--todof1 .mc-modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
   }
 }
 
