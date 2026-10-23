@@ -59,6 +59,7 @@ export const projects = [
     status: 'Desplegado',
     slug: 'todof1',
     link: 'https://todof1.alwaysdata.net/',
+    detail: '/proyectos/todof1',
     github: 'https://github.com/Daniel-Zarco/TodoF1',
     demo: 'https://todof1.alwaysdata.net/',
     demoLabel: 'Ver proyecto',
