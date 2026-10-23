@@ -22,6 +22,12 @@ const makePlaceholder = (width, height) =>
 const PLACEHOLDER_DESKTOP = makePlaceholder(1600, 900);
 const PLACEHOLDER_MOBILE = makePlaceholder(800, 1000);
 
+const TODOF1_SHOTS = '/project-previews/todof1';
+const shot = (desktop, mobile) => ({
+  desktop: `${TODOF1_SHOTS}/${desktop}`,
+  mobile: `${TODOF1_SHOTS}/${mobile}`,
+});
+
 function ProjectPicture({
   desktop,
   mobile,
@@ -44,10 +50,10 @@ function ProjectPicture({
     >
       <picture>
         {!failed && (
-          <source media="(min-width: 769px)" srcSet={desktopSrc} />
+          <source media="(max-width: 768px)" srcSet={mobileSrc} />
         )}
         <img
-          src={failed ? PLACEHOLDER_MOBILE : mobileSrc}
+          src={failed ? PLACEHOLDER_DESKTOP : desktopSrc}
           alt={showPlaceholder ? '' : alt}
           loading="lazy"
           onError={() => setFailed(true)}
@@ -64,6 +70,70 @@ function ProjectPicture({
   );
 }
 
+function ProjectGallery({ shots, index, direction, onNavigate, alt }) {
+  const total = shots.length;
+  const current = shots[index];
+  const multiple = total > 1;
+
+  return (
+    <div className={`mc-gallery${multiple ? ' is-multiple' : ''}`}>
+      <div className="mc-gallery-frame">
+        {multiple && (
+          <button
+            type="button"
+            className="mc-gallery-nav mc-gallery-nav--prev"
+            onClick={() => onNavigate(-1)}
+            aria-label="Captura anterior"
+          >
+            ‹
+          </button>
+        )}
+        {multiple ? (
+          <button
+            type="button"
+            className="mc-gallery-hit"
+            onClick={() => onNavigate(1)}
+            aria-label="Ver siguiente captura"
+            title="Siguiente captura"
+          >
+            <picture
+              key={`${index}-${direction}`}
+              className={`mc-gallery-picture${direction < 0 ? ' is-prev' : ''}`}
+            >
+              <source media="(max-width: 768px)" srcSet={current.mobile} />
+              <img
+                src={current.desktop}
+                alt={`${alt} (${index + 1} de ${total})`}
+                loading="eager"
+              />
+            </picture>
+          </button>
+        ) : (
+          <picture className="mc-gallery-picture">
+            <source media="(max-width: 768px)" srcSet={current.mobile} />
+            <img src={current.desktop} alt={alt} loading="eager" />
+          </picture>
+        )}
+        {multiple && (
+          <button
+            type="button"
+            className="mc-gallery-nav mc-gallery-nav--next"
+            onClick={() => onNavigate(1)}
+            aria-label="Captura siguiente"
+          >
+            ›
+          </button>
+        )}
+        {multiple && (
+          <span className="mc-gallery-count" aria-live="polite">
+            {index + 1} / {total}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 const facts = [
   { key: 'Tipo', value: 'TFG · Full-Stack' },
   { key: 'Estado', value: 'Desplegado' },
@@ -75,43 +145,50 @@ const features = [
     n: '01',
     title: 'Temporadas',
     text: 'Selector de temporada desde 1950, resumen del campeonato y persistencia del año activo en la URL y en la sesión.',
-    desktop: null,
-    mobile: null,
+    shots: [shot('Temporadas1Pc.png', 'Temporadas1Mv.png')],
   },
   {
     n: '02',
     title: 'Pilotos',
     text: 'Clasificación de pilotos, búsqueda por nombre, filtro por escudería y ficha con temporadas, victorias, podios y equipos.',
-    desktop: null,
-    mobile: null,
+    shots: [
+      shot('Pilotos1Pc.png', 'Pilotos1Mv.jpg'),
+      shot('Pilotos2Pc.png', 'Pilotos2Mv.png'),
+    ],
   },
   {
     n: '03',
     title: 'Escuderías',
     text: 'Copa de constructores, ordenación y fichas con puntos, victorias, podios, posición media y pilotos de la temporada.',
-    desktop: null,
-    mobile: null,
+    shots: [
+      shot('Escuderias1Pc.png', 'Escuderias1Mv.png'),
+      shot('Escuderias2Pc.png', 'Escuderias2Mv.png'),
+    ],
   },
   {
     n: '04',
     title: 'Circuitos',
     text: 'Calendario de Grandes Premios, búsqueda, filtro por país, trazados SVG, horarios de sesiones y resultados de carrera.',
-    desktop: null,
-    mobile: null,
+    shots: [
+      shot('Circuitos1Pc.png', 'Circuitos1Mv.png'),
+      shot('Circuitos2Pc.png', 'Circuitos2Mv.png'),
+    ],
   },
   {
     n: '05',
-    title: 'Clasificaciones',
-    text: 'Tablas completas de pilotos y constructores con acceso directo a cada ficha desde la propia clasificación.',
-    desktop: null,
-    mobile: null,
+    title: 'Temas personalizados',
+    text: 'Personalización de la interfaz con temas inspirados en las escuderías de Fórmula 1, adaptando los colores y elementos visuales al equipo seleccionado.',
+    shots: [shot('Temas1Pc.png', 'Temas1Mv.png')],
   },
   {
     n: '06',
     title: 'Estadísticas',
     text: 'Dashboard con resumen, evolución del campeonato y comparador de pilotos, con gráficos y respaldo en tablas.',
-    desktop: null,
-    mobile: null,
+    shots: [
+      shot('Estadisticas1Pc.png', 'Estadisticas1Mv.png'),
+      shot('Estadisticas2Pc.png', 'Estadisticas2Mv.png'),
+      shot('Estadisticas3Pc.png', 'Estadisticas3Mv.png'),
+    ],
   },
 ];
 
@@ -179,7 +256,23 @@ export default function TodoF1CaseStudy() {
   usePage();
 
   const [active, setActive] = useState(null);
+  const [shotIndex, setShotIndex] = useState(0);
+  const [shotDirection, setShotDirection] = useState(1);
   const panelRef = useRef(null);
+
+  const openFeature = (feature) => {
+    setShotIndex(0);
+    setShotDirection(1);
+    setActive(feature);
+  };
+
+  const navigateShot = (delta) => {
+    if (!active || active.shots.length < 2) return;
+    setShotDirection(delta);
+    setShotIndex(
+      (current) => (current + delta + active.shots.length) % active.shots.length,
+    );
+  };
 
   useEffect(() => {
     if (!active) return;
@@ -191,6 +284,16 @@ export default function TodoF1CaseStudy() {
     const onKey = (event) => {
       if (event.key === 'Escape') {
         setActive(null);
+        return;
+      }
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        if (active.shots.length < 2) return;
+        event.preventDefault();
+        const delta = event.key === 'ArrowRight' ? 1 : -1;
+        setShotDirection(delta);
+        setShotIndex(
+          (current) => (current + delta + active.shots.length) % active.shots.length,
+        );
         return;
       }
       if (event.key === 'Tab' && panelRef.current) {
@@ -282,6 +385,8 @@ export default function TodoF1CaseStudy() {
           </h2>
           <div data-reveal>
             <ProjectPicture
+              desktop={`${TODOF1_SHOTS}/VistaPreviaPc.jpg`}
+              mobile={`${TODOF1_SHOTS}/VistaPreviaMv.png`}
               alt="Captura de la aplicación TodoF1"
               label="Vista previa"
               title="Captura pendiente"
@@ -339,7 +444,7 @@ export default function TodoF1CaseStudy() {
                 key={f.n}
                 type="button"
                 className="mc-feature"
-                onClick={() => setActive(f)}
+                onClick={() => openFeature(f)}
                 aria-haspopup="dialog"
                 data-reveal
                 data-reveal-delay={`${(i % 3) * 70}`}
@@ -535,15 +640,13 @@ export default function TodoF1CaseStudy() {
             </button>
             <span className="mc-modal-kicker">{active.n}</span>
             <h3 className="mc-modal-title">{active.title}</h3>
-            <ProjectPicture
+            <ProjectGallery
               key={active.n}
-              desktop={active.desktop}
-              mobile={active.mobile}
+              shots={active.shots}
+              index={shotIndex}
+              direction={shotDirection}
+              onNavigate={navigateShot}
               alt={`Captura de ${active.title} en TodoF1`}
-              label="Funcionalidad"
-              title="Captura pendiente"
-              meta="Desktop y móvil"
-              compact
             />
             <p className="mc-modal-text">{active.text}</p>
           </div>
