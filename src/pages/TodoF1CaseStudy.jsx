@@ -385,7 +385,7 @@ export default function TodoF1CaseStudy() {
           </h2>
           <div data-reveal>
             <ProjectPicture
-              desktop={`${TODOF1_SHOTS}/VistaPreviaPc.jpg`}
+              desktop={`${TODOF1_SHOTS}/VistaPreviaPc.png`}
               mobile={`${TODOF1_SHOTS}/VistaPreviaMv.png`}
               alt="Captura de la aplicación TodoF1"
               label="Vista previa"
