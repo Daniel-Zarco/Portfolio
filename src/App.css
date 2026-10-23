@@ -3041,7 +3041,7 @@
 }
 
 .mc-preview .mc-shot {
-  width: min(100%, 480px);
+  width: 80%;
   margin: 0 auto;
 }
 
