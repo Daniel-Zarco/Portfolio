@@ -3040,6 +3040,11 @@
   box-shadow: none;
 }
 
+.mc-preview .mc-shot {
+  width: min(100%, 480px);
+  margin: 0 auto;
+}
+
 /* ---------- TodoF1: galería de capturas en modal ---------- */
 .mc-gallery {
   margin: 0;
