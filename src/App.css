@@ -2873,7 +2873,7 @@
   animation: mcPanelIn 0.3s var(--ease-smooth);
 }
 
-.mc-modal--todof1 .mc-modal-body {
+.mc-modal--case-study .mc-modal-body {
   display: contents;
 }
 
@@ -2973,7 +2973,7 @@
     right: 0.75rem;
   }
 
-  .mc-modal--todof1 {
+  .mc-modal--case-study {
     align-items: center;
     overflow: hidden;
     padding:
@@ -2983,7 +2983,7 @@
       max(14px, env(safe-area-inset-left, 0px));
   }
 
-  .mc-modal--todof1 .mc-modal-panel {
+  .mc-modal--case-study .mc-modal-panel {
     display: flex;
     flex-direction: column;
     max-height: calc(
@@ -2997,7 +2997,7 @@
     padding: 0;
   }
 
-  .mc-modal--todof1 .mc-modal-body {
+  .mc-modal--case-study .mc-modal-body {
     display: block;
     flex: 1 1 auto;
     min-height: 0;
@@ -3007,7 +3007,7 @@
     padding: 1.25rem;
   }
 
-  .mc-modal--todof1 .mc-modal-close {
+  .mc-modal--case-study .mc-modal-close {
     top: 0.75rem;
     right: 0.75rem;
     z-index: 2;

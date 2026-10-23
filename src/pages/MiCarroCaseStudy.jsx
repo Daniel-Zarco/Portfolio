@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { usePage } from '../hooks/usePage';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { projects } from '../data';
 
 const project = projects.find((p) => p.slug === 'micarro');
@@ -128,6 +130,7 @@ const stack = [
 
 export default function MiCarroCaseStudy() {
   usePage();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const [active, setActive] = useState(null);
   const panelRef = useRef(null);
@@ -136,7 +139,27 @@ export default function MiCarroCaseStudy() {
     if (!active) return;
 
     const previousActive = document.activeElement;
-    document.body.style.overflow = 'hidden';
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const previousBodyStyles = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+    };
+
+    body.style.overflow = 'hidden';
+
+    if (isMobile) {
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
+    }
+
     panelRef.current?.focus();
 
     const onKey = (event) => {
@@ -164,13 +187,66 @@ export default function MiCarroCaseStudy() {
     document.addEventListener('keydown', onKey);
 
     return () => {
-      document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
-      if (previousActive instanceof HTMLElement) previousActive.focus();
+
+      Object.entries(previousBodyStyles).forEach(([property, value]) => {
+        body.style[property] = value;
+      });
+
+      if (isMobile) {
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+
+        root.style.scrollBehavior = 'auto';
+        if (previousActive instanceof HTMLElement) previousActive.focus();
+        window.scrollTo(0, scrollY);
+        root.style.scrollBehavior = previousScrollBehavior;
+      } else if (previousActive instanceof HTMLElement) {
+        previousActive.focus();
+      }
     };
-  }, [active]);
+  }, [active, isMobile]);
 
   if (!project) return null;
+
+  const modal = active ? (
+    <div
+      className="mc-modal mc-modal--case-study"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) setActive(null);
+      }}
+    >
+      <div
+        className="mc-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${active.n} · ${active.title}`}
+        ref={panelRef}
+        tabIndex={-1}
+      >
+        <button
+          type="button"
+          className="mc-modal-close"
+          onClick={() => setActive(null)}
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+        <div className="mc-modal-body">
+          <span className="mc-modal-kicker">{active.n}</span>
+          <h3 className="mc-modal-title">{active.title}</h3>
+          <picture>
+            <source media="(min-width: 769px)" srcSet={active.desktop} />
+            <img
+              src={active.mobile}
+              alt={`Captura de ${active.title} en MiCarro`}
+            />
+          </picture>
+          <p className="mc-modal-text">{active.text}</p>
+        </div>
+      </div>
+    </div>
+  ) : null;
 
   return (
     <div className="page mc">
@@ -444,42 +520,7 @@ export default function MiCarroCaseStudy() {
       </section>
 
       {/* ============ MODAL FUNCIONALIDAD ============ */}
-      {active && (
-        <div
-          className="mc-modal"
-          onClick={(event) => {
-            if (event.target === event.currentTarget) setActive(null);
-          }}
-        >
-          <div
-            className="mc-modal-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${active.n} · ${active.title}`}
-            ref={panelRef}
-            tabIndex={-1}
-          >
-            <button
-              type="button"
-              className="mc-modal-close"
-              onClick={() => setActive(null)}
-              aria-label="Cerrar"
-            >
-              ×
-            </button>
-            <span className="mc-modal-kicker">{active.n}</span>
-            <h3 className="mc-modal-title">{active.title}</h3>
-            <picture>
-              <source media="(min-width: 769px)" srcSet={active.desktop} />
-              <img
-                src={active.mobile}
-                alt={`Captura de ${active.title} en MiCarro`}
-              />
-            </picture>
-            <p className="mc-modal-text">{active.text}</p>
-          </div>
-        </div>
-      )}
+      {isMobile && modal ? createPortal(modal, document.body) : modal}
     </div>
   );
 }

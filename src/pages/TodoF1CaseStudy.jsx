@@ -2,26 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { usePage } from '../hooks/usePage';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { projects } from '../data';
 
 const project = projects.find((p) => p.slug === 'todof1');
 
-function useMediaQuery(query) {
-  const [matches, setMatches] = useState(
-    () => window.matchMedia(query).matches,
-  );
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    const onChange = (event) => setMatches(event.matches);
-
-    media.addEventListener('change', onChange);
-
-    return () => media.removeEventListener('change', onChange);
-  }, [query]);
-
-  return matches;
-}
 
 const makePlaceholder = (width, height) =>
   `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
@@ -379,7 +364,7 @@ export default function TodoF1CaseStudy() {
 
   const modal = active ? (
     <div
-      className="mc-modal mc-modal--todof1"
+      className="mc-modal mc-modal--case-study"
       onClick={(event) => {
         if (event.target === event.currentTarget) setActive(null);
       }}
