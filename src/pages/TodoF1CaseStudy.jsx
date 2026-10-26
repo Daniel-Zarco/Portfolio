@@ -546,6 +546,9 @@ export default function TodoF1CaseStudy() {
           <h2 className="mc-h2" data-reveal>
             Arquitectura
           </h2>
+          <span className="mc-flow-label" data-reveal>
+            Consultas en tiempo real
+          </span>
           <div className="mc-flow mc-flow--main" data-reveal>
             <span className="mc-node">Navegador</span>
             <span className="mc-arrow">→</span>
@@ -555,6 +558,9 @@ export default function TodoF1CaseStudy() {
             <span className="mc-arrow">→</span>
             <span className="mc-node">Jolpica</span>
           </div>
+          <span className="mc-flow-label" data-reveal>
+            Importación histórica
+          </span>
           <div className="mc-flow mc-flow--sub" data-reveal>
             <span className="mc-node mc-node--muted">Artisan f1:importar</span>
             <span className="mc-arrow">→</span>
@@ -568,13 +574,16 @@ export default function TodoF1CaseStudy() {
             <span>Eloquent + claves foráneas</span>
           </div>
           <p className="mc-motor-text" data-reveal>
-            La interfaz son páginas PHP con JavaScript propio. Laravel aporta el
-            esqueleto del proyecto, el comando de importación y el modelo de
-            datos; el proxy /api/f1.php centraliza las consultas a Jolpica. Cada
-            petición se valida contra una lista blanca de rutas y se guarda en
-            caché; si el proveedor falla, se sirve la última copia válida en
-            lugar de dejar la vista sin datos. MariaDB conserva los datos
-            históricos importados y las tablas de usuarios y registros.
+            La interfaz está desarrollada con PHP y JavaScript, mientras que
+            Laravel gestiona la importación y persistencia de datos históricos
+            mediante Eloquent y MariaDB.
+          </p>
+          <p className="mc-motor-text" data-reveal>
+            Las consultas externas se centralizan a través de un proxy PHP que
+            incorpora validación de rutas y caché persistente. Este sistema
+            reduce las peticiones a la API de Jolpica y permite recuperar la
+            última respuesta válida cuando el servicio externo no está
+            disponible.
           </p>
         </div>
       </section>

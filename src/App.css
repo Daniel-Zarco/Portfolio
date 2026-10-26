@@ -2547,6 +2547,17 @@
   margin: 0;
 }
 
+.mc-flow-label {
+  display: block;
+  margin: 0 0 0.75rem;
+  color: var(--color-mist);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .mc-flow {
   display: flex;
   flex-wrap: wrap;
@@ -2641,6 +2652,10 @@
   line-height: 1.75;
   max-width: 52rem;
   margin-top: clamp(2rem, 5vh, 3rem);
+}
+
+.mc-architecture .mc-motor-text + .mc-motor-text {
+  margin-top: 1rem;
 }
 
 .mc-dev-grid {
