@@ -138,9 +138,9 @@ function ProjectGallery({ shots, index, direction, onNavigate, alt }) {
 }
 
 const facts = [
-  { key: 'Tipo', value: 'TFG · Full-Stack' },
+  { key: 'Tipo', value: 'Full-Stack · Proyecto personal' },
   { key: 'Estado', value: 'Desplegado' },
-  { key: 'Arquitectura', value: 'PHP + proxy de datos' },
+  { key: 'Arquitectura', value: 'PHP · API REST · Caché' },
 ];
 
 const features = [
@@ -483,19 +483,22 @@ export default function TodoF1CaseStudy() {
           <div className="mc-about-grid">
             <div className="mc-about-text" data-reveal>
               <p>
-                TodoF1 nace como TFG con un objetivo: reunir en una sola
-                plataforma la información histórica de la Fórmula 1 y hacerla
-                navegable por temporada.
+                TodoF1 comenzó como un Trabajo de Fin de Grado y ha evolucionado
+                hasta convertirse en una plataforma web para explorar la
+                historia de la Fórmula 1, organizando la información por
+                temporadas.
               </p>
               <p>
-                La aplicación permite pasar de una visión global del campeonato
-                a la ficha de un piloto, una escudería o un circuito, sin perder
-                el contexto del año seleccionado.
+                La aplicación conecta campeonatos, pilotos, escuderías y
+                circuitos mediante una navegación contextual que permite
+                consultar estadísticas, resultados y clasificaciones de cada
+                temporada.
               </p>
               <p>
-                Incluye un panel de administración protegido con estadísticas
-                agregadas de los registros, además de una capa de respaldo para
-                que los datos sigan disponibles si la API externa no responde.
+                Incorpora un panel de administración protegido y un sistema de
+                caché persistente que reduce las consultas externas y permite
+                mantener disponibles los datos previamente almacenados ante
+                posibles fallos de la API.
               </p>
             </div>
             <div className="mc-facts" data-reveal data-reveal-delay="120">
