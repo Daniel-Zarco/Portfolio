@@ -197,20 +197,20 @@ const features = [
 
 const dataFlow = [
   {
-    title: 'Temporada activa',
-    text: 'El año viaja en la URL, se guarda en sessionStorage y cada página vuelve a consultar los datos de esa temporada.',
+    title: 'Gestión de temporadas',
+    text: 'Selección y persistencia del año activo para mantener una navegación coherente entre las distintas secciones.',
   },
   {
-    title: 'Consultas',
-    text: 'Las páginas piden clasificaciones, calendarios y resultados a Jolpica, paginando los endpoints que limitan a 100 registros.',
+    title: 'Integración de datos',
+    text: 'Consultas a la API de Jolpica, con paginación y recuperación de resultados, calendarios y clasificaciones.',
   },
   {
-    title: 'Relaciones',
-    text: 'Las estadísticas de carrera relacionan piloto, escudería y Gran Premio mediante claves foráneas en MariaDB.',
+    title: 'Modelo relacional',
+    text: 'Relación entre pilotos, escuderías y Grandes Premios mediante claves foráneas en MariaDB.',
   },
   {
-    title: 'Procesamiento',
-    text: 'Victorias, podios, mejor resultado y equipos se agregan a partir de los resultados; la evolución usa la clasificación oficial de cada ronda.',
+    title: 'Cálculo de estadísticas',
+    text: 'Procesamiento de resultados para obtener victorias, podios, posiciones y evolución de los campeonatos.',
   },
 ];
 
@@ -603,15 +603,12 @@ export default function TodoF1CaseStudy() {
             ))}
           </ol>
           <p className="mc-motor-text" data-reveal>
-            La organización es multitemporada: el año seleccionado se propaga en
-            la URL y en sessionStorage, y cada vista vuelve a consultar los
-            endpoints correspondientes. En la base de datos, cada registro de
-            z_stats_carrera relaciona un piloto, una escudería y un Gran Premio;
-            los identificadores externos de Jolpica son únicos y la pareja
-            temporada-ronda identifica cada prueba. Las estadísticas de piloto y
-            escudería se calculan agregando resultados paginados, mientras que la
-            evolución del campeonato utiliza las clasificaciones oficiales
-            publicadas tras cada ronda, sin recalcular puntos históricos.
+            TodoF1 combina información procedente de la API de Jolpica con datos
+            históricos almacenados en MariaDB. La organización multitemporada
+            permite mantener el contexto de cada campeonato, mientras que el
+            procesamiento de resultados genera estadísticas y visualizaciones
+            para analizar la evolución de pilotos y escuderías a lo largo de la
+            historia de la Fórmula 1.
           </p>
         </div>
       </section>
